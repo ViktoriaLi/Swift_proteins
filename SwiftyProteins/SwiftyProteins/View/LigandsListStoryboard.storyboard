@@ -38,6 +38,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="5SA-XG-nsR"/>
+                    <connections>
+                        <outlet property="proteinsSearchBar" destination="AN6-ak-kCw" id="dXi-SH-RLD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="77D-Yl-qOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

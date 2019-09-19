@@ -10,11 +10,16 @@ import UIKit
 
 class LigandsListViewController: UITableViewController {
 
+    @IBOutlet weak var proteinsSearchBar: UISearchBar!
+    
     var proteinsList: [String] = []
+    var filteredProteins: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        proteinsSearchBar.delegate = self
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         
         if let sourceFile = Bundle.main.path(forResource: "ligands", ofType: "txt") {
@@ -22,6 +27,7 @@ class LigandsListViewController: UITableViewController {
                 proteinsList = data.components(separatedBy: "\n")
             }
         }
+        filteredProteins = proteinsList
     }
     
 }
@@ -38,14 +44,23 @@ extension LigandsListViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return proteinsList.count
+        return filteredProteins.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
         
-        cell.textLabel?.text = proteinsList[indexPath.row]
+        cell.textLabel?.text = filteredProteins[indexPath.row]
         
         return cell
+    }
+}
+
+extension LigandsListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredProteins = searchText.isEmpty ? proteinsList : proteinsList.filter { (item: String) -> Bool in
+            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
 }
