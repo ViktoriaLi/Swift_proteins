@@ -34,8 +34,25 @@ class LigandsListViewController: UITableViewController {
 
 extension LigandsListViewController {
     
+    func loadPDBFile(ligand: String) {
+        let dir = Array(ligand)[0]
+        guard let url = URL(string: "https://files.rcsb.org/ligands/\(dir)/\(ligand)/\(ligand)_ideal.pdb") else { return }
+        print(url)
+        let task = URLSession.shared.downloadTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    if let fileContent = try? String(contentsOf: data) {
+                        print(fileContent)
+                        //completionHandler(pdbfile)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        loadPDBFile(ligand: filteredProteins[indexPath.row])
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int
