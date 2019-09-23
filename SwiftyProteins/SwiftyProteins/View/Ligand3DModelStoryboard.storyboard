@@ -57,7 +57,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNM-p2-ggL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="jjQ-GI-DqG"/>
+                <tapGestureRecognizer id="jjQ-GI-DqG">
+                    <connections>
+                        <action selector="tapGestureAction:" destination="Zqj-Cw-2pq" id="Zu3-YO-uay"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <pinchGestureRecognizer id="Ist-Jn-4sP">
                     <connections>
                         <action selector="pinchGestureAction:" destination="Zqj-Cw-2pq" id="ddW-35-cTt"/>

@@ -46,7 +46,33 @@ class Ligand3DModelViewController: UIViewController {
         setCamera()
         build3DModel()
     }
-
+    
+    @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let location: CGPoint = sender.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty{
+                let tappedNode = hits.first?.node
+                
+                let textTodraw = SCNText(string: tappedNode!.name, extrusionDepth: 1)
+                textTodraw.firstMaterial?.transparency = 1
+                textTodraw.firstMaterial?.diffuse.contents = UIColor.yellow
+                let textNode = SCNNode(geometry: textTodraw)
+                textNode.position = tappedNode!.position
+                tappedNode?.addChildNode(textNode)
+                /*let label = UILabel(frame: CGRect(x: 0, y: 35, width: 200, height: 30))
+                label.font = UIFont.systemFont(ofSize: 30)
+                view.addSubview(label)
+                label.textAlignment = .center
+                label.text = "25"
+                label.textColor = .white*/
+                
+                
+                //tappedNode?.geometry?.firstMaterial?.diffuse.contents = label
+            }
+        }
+    }
+    
     func setScene() {
         sceneView.scene = scene
         sceneView.backgroundColor = UIColor.black
@@ -69,7 +95,7 @@ class Ligand3DModelViewController: UIViewController {
         
         let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction))
         sceneView.addGestureRecognizer(panRecognizer)
-        sceneView.addGestureRecognizer(pinchGesture)
+        view.addGestureRecognizer(pinchGesture)
         sceneView.addGestureRecognizer(tapGesture)
     }
     
@@ -78,7 +104,7 @@ class Ligand3DModelViewController: UIViewController {
     func setCamera() {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 50)
         sceneView.pointOfView = cameraNode
         scene.rootNode.addChildNode(cameraNode)
     }

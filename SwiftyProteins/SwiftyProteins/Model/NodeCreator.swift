@@ -16,8 +16,8 @@ class NodeCreator {
         node.geometry = SCNSphere(radius: 0.3)
         node.position = SCNVector3(params.x, params.y, params.z)
         node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: params.type)
-        
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
+        node.name = String(params.type)
         return node
     }
 
