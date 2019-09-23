@@ -19,40 +19,7 @@ class NodeCreator {
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
         return node
     }
-    
-    class func createCylinder(position: SCNVector3, color: UIColor = .green) -> SCNNode {
-        let shape = SCNCylinder(radius: 0.2, height: 1.0)
-        shape.firstMaterial?.diffuse.contents = color
-        let node = SCNNode(geometry: shape)
-        node.position = position
-        return node
-    }
-    
-    /*class func makeCylinder(with params: AtomDescription, parent: SCNNode, child: SCNNode) -> SCNNode {
-        let distance = sqrt(pow(child.position.x - parent.position.x, 2) + pow(child.position.y - parent.position.y, 2) + pow(child.position.z - parent.position.z, 2))
-        
-        let node = SCNNode()
-        node.geometry = SCNCylinder(radius: 0.1, height: CGFloat(distance))
-        
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
-        
-        //step 1: handle rotation
-        node.position = parent.position
-        //node.look(at: targetPosition)
-        node.eulerAngles.x = Float.pi/2
-        //node.eulerAngles.y = atan2f(child.position.y, child.position.)
-        
-        //step 2: handle scaling and positioning
-        node.pivot = SCNMatrix4MakeTranslation(-0.5, 0, 0)
-        //let width = CGFloat((child.position - parent.position).magnitude)
-        //(node.geometry as? SCNCylinder)?.height = width
-        
-        //TODO: Cylinder should link source and target nodes
-        //Tried a lot of things above but didn't manage to do it
-        
-        return node
-    }*/
-    
+
     class func makeCylinder(with params: AtomDescription, parent: SCNNode, child: SCNNode) -> SCNNode {
         let rootNode = SCNNode()
         
@@ -79,3 +46,4 @@ class NodeCreator {
         return rootNode
     }
 }
+

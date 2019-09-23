@@ -27,8 +27,21 @@ class Ligand3DModelViewController: UIViewController {
     var atomNodes = [SCNNode]()
     var atomInfos = [AtomDescription]()
     
+    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+    
+    @IBOutlet weak var panGesture: UIPanGestureRecognizer!
+    @IBOutlet weak var rotationGesture: UIRotationGestureRecognizer!
+    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tapGesture.delegate = self
+        pinchGesture.delegate = self
+        panGesture.delegate = self
+        rotationGesture.delegate = self
+        
+        
+        
         setScene()
         setCamera()
         build3DModel()
@@ -38,13 +51,44 @@ class Ligand3DModelViewController: UIViewController {
         sceneView.scene = scene
         sceneView.backgroundColor = UIColor.lightGray
         sceneView.autoenablesDefaultLighting = true
+        sceneView.allowsCameraControl = true
+        
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = SCNLight.LightType.ambient
+        ambientLightNode.light!.color = UIColor(white: 0.67, alpha: 1.0)
+        scene.rootNode.addChildNode(ambientLightNode)
+        
+        
+        let omniLightNode = SCNNode()
+        omniLightNode.light = SCNLight()
+        omniLightNode.light!.type = SCNLight.LightType.omni
+        omniLightNode.light!.color = UIColor(white: 0.75, alpha: 1.0)
+        omniLightNode.position = SCNVector3Make(0, 50, 50)
+        scene.rootNode.addChildNode(omniLightNode)
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction))
+        sceneView.addGestureRecognizer(panRecognizer)
+        sceneView.addGestureRecognizer(pinchGesture)
+        sceneView.addGestureRecognizer(tapGesture)
     }
+    
+    var geometryNode: SCNNode = SCNNode()
     
     func setCamera() {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: 5, z: 30)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
         scene.rootNode.addChildNode(cameraNode)
+    }
+    
+    @IBAction func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        guard sender.view != nil else { return }
+        
+        if sender.state == .began || sender.state == .changed {
+            sender.view?.transform = (sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!
+            sender.scale = 1.0
+        }
     }
     
     func build3DModel() {
@@ -99,7 +143,7 @@ class Ligand3DModelViewController: UIViewController {
             }
             print("atomInfos2")
             print(atomInfos)
-            
+            //scene.rootNode.pivot = SCNMatrix4MakeTranslation(0.5, 0.5, 0.5)
         }
         
         /*var i: Int = 0
@@ -193,48 +237,27 @@ class Ligand3DModelViewController: UIViewController {
         
         SCNTransaction.commit()*/
     }
+
+    var currentAngle: Float = 0.0
     
-    /*override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        let location = touch.location(in: sceneView)
+    @objc func panGestureAction(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: sender.view!)
+        var newAngle = (Float)(translation.x)*(Float)(Double.pi)/180.0
+        newAngle += currentAngle
         
-        hittedObj.geometry?.firstMaterial?.emission.contents = oldColor
+        scene.rootNode.transform = SCNMatrix4MakeRotation(newAngle, 1, 1, 1)
         
-        let hitList = sceneView.hitTest(location, options: nil)
-        if let hitObject = hitList.first {
-            for currAtom in descData{
-                if currAtom.symb?.lowercased() == hitObject.node.name?.lowercased() {
-                    
-                    melt.text = "Melting point: --"
-                    boil.text = "Boiling point: --"
-                    name.text = "Full Name: --"
-                    descript.text = "--"
-                    mass.text = "Atomic mass: --"
-                    
-                    if let temp = currAtom.melt {
-                        melt.text = "Melting point: \(String(describing: temp))°C"
-                    }
-                    if let temp = currAtom.name {
-                        name.text = "Full Name: \(temp)"
-                    }
-                    if let temp = currAtom.boil {
-                        boil.text = "Boiling point: \(String(describing: temp))°C"
-                    }
-                    if let temp = currAtom.atomic_mass {
-                        mass.text = "Atomic mass: \(String(describing: temp))"
-                    }
-                    descript.text = currAtom.summary
-                }
-            }
-            hittedObj = hitObject.node
-            oldColor = hitObject.node.geometry?.firstMaterial?.emission.contents as! UIColor
-            hitObject.node.geometry?.firstMaterial?.emission.contents = UIColor.flatMint
-        } else {
-            melt.text = nil
-            boil.text = nil
-            name.text = nil
-            descript.text = nil
-            mass.text = nil
+        if(sender.state == UIGestureRecognizer.State.ended) {
+            currentAngle = newAngle
         }
-    }*/
+    }
+    
+    @IBAction func rotationAction(_ sender: UIRotationGestureRecognizer) {
+        
+    }
+    
+}
+
+extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
+    
 }

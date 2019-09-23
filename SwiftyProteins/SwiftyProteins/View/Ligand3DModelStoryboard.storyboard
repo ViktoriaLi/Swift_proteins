@@ -27,6 +27,13 @@
                             </segmentedControl>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgH-vZ-Wg0">
                                 <rect key="frame" x="0.0" y="156" width="414" height="706"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jjQ-GI-DqG" appends="YES" id="qFb-Yo-f54"/>
+                                    <outletCollection property="gestureRecognizers" destination="Ist-Jn-4sP" appends="YES" id="ouZ-jM-h9I"/>
+                                    <outletCollection property="gestureRecognizers" destination="0Ey-DX-Fxf" appends="YES" id="pkw-WX-6Tl"/>
+                                    <outletCollection property="gestureRecognizers" destination="Myx-s8-40X" appends="YES" id="boh-4k-BOy"/>
+                                </connections>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,10 +49,26 @@
                     </view>
                     <navigationItem key="navigationItem" id="eOv-Ka-bVr"/>
                     <connections>
+                        <outlet property="panGesture" destination="Myx-s8-40X" id="Khc-2t-dLy"/>
+                        <outlet property="pinchGesture" destination="Ist-Jn-4sP" id="TiC-NU-5oZ"/>
+                        <outlet property="rotationGesture" destination="0Ey-DX-Fxf" id="RtU-Kn-gUI"/>
                         <outlet property="sceneView" destination="UgH-vZ-Wg0" id="oCI-sF-YVH"/>
+                        <outlet property="tapGesture" destination="jjQ-GI-DqG" id="dC9-xV-uzb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNM-p2-ggL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jjQ-GI-DqG"/>
+                <pinchGestureRecognizer id="Ist-Jn-4sP">
+                    <connections>
+                        <action selector="pinchGestureAction:" destination="Zqj-Cw-2pq" id="ddW-35-cTt"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <rotationGestureRecognizer id="0Ey-DX-Fxf">
+                    <connections>
+                        <action selector="rotationAction:" destination="Zqj-Cw-2pq" id="JM4-ME-33Z"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Myx-s8-40X"/>
             </objects>
             <point key="canvasLocation" x="934.78260869565224" y="43.526785714285715"/>
         </scene>
