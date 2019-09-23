@@ -40,8 +40,6 @@ class Ligand3DModelViewController: UIViewController {
         panGesture.delegate = self
         rotationGesture.delegate = self
         
-        
-        
         setScene()
         setCamera()
         build3DModel()
@@ -51,26 +49,27 @@ class Ligand3DModelViewController: UIViewController {
         if sender.state == .ended {
             let location: CGPoint = sender.location(in: sceneView)
             let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty{
-                let tappedNode = hits.first?.node
+            if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
                 
-                let textTodraw = SCNText(string: tappedNode!.name, extrusionDepth: 1)
-                textTodraw.firstMaterial?.transparency = 1
-                textTodraw.firstMaterial?.diffuse.contents = UIColor.yellow
-                let textNode = SCNNode(geometry: textTodraw)
-                textNode.position = tappedNode!.position
-                tappedNode?.addChildNode(textNode)
-                /*let label = UILabel(frame: CGRect(x: 0, y: 35, width: 200, height: 30))
-                label.font = UIFont.systemFont(ofSize: 30)
-                view.addSubview(label)
-                label.textAlignment = .center
-                label.text = "25"
-                label.textColor = .white*/
-                
-                
-                //tappedNode?.geometry?.firstMaterial?.diffuse.contents = label
+                showAtomDescription(tappedNode: tappedNode)
             }
         }
+    }
+    
+    func showAtomDescription(tappedNode : SCNNode) {
+        let text = SCNText(string: tappedNode.name, extrusionDepth: 0)
+        let font = UIFont(name: "Futura", size: 0.5)
+        text.font = font
+        text.flatness = 0.005
+        text.alignmentMode = CATextLayerAlignmentMode.natural.rawValue
+        text.firstMaterial?.diffuse.contents = UIColor.white
+        //text.firstMaterial?.specular.contents = UIColor.black
+        text.firstMaterial?.isDoubleSided = true
+        let textNode = SCNNode(geometry: text)
+        textNode.position = tappedNode.position
+        textNode.eulerAngles = tappedNode.eulerAngles
+        sceneView.scene!.rootNode.addChildNode(textNode)
+        
     }
     
     func setScene() {

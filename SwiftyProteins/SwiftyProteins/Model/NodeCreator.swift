@@ -30,31 +30,31 @@ class NodeCreator {
         case "O":
             return UIColor.red
         case "N":
-            return UIColor(red: 143, green: 143, blue: 255, alpha: 1)
+            return #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         case "S":
-            return UIColor(red: 255, green: 200, blue: 50, alpha: 1)
+            return UIColor.yellow
         case "P", "Fe", "Ba":
-            return UIColor(red: 255, green: 165, blue: 0, alpha: 1)
+            return UIColor.orange
         case "Na":
-            return UIColor(red: 0, green: 0, blue: 255, alpha: 1)
+            return UIColor.purple
         case "Mg":
-            return UIColor(red: 34, green: 139, blue: 34, alpha: 1)
+            return #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         case "Ca", "Mn", "Cr", "Al", "Ti", "Ag":
-            return UIColor(red: 128, green: 128, blue: 144, alpha: 1)
+            return #colorLiteral(red: 0.4352941215, green: 0.4431372583, blue: 0.4745098054, alpha: 1)
         case "Zn", "Cu", "Ni", "Br":
-            return UIColor(red: 165, green: 42, blue: 42, alpha: 1)
+            return #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         case "Cl", "B":
-            return UIColor(red: 0, green: 255, blue: 0, alpha: 1)
+            return #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         case "F", "Si", "Au":
-            return UIColor(red: 218, green: 165, blue: 32, alpha: 1)
+            return #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
         case "I":
-            return UIColor(red: 160, green: 32, blue: 240, alpha: 1)
+            return #colorLiteral(red: 0.9686274529, green: 0.401878486, blue: 0.9267960709, alpha: 1)
         case "Li":
-            return UIColor(red: 178, green: 34, blue: 34, alpha: 1)
+            return #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
         case "He":
-            return UIColor(red: 255, green: 192, blue: 203, alpha: 1)
+            return #colorLiteral(red: 0.9665093591, green: 0.02991147152, blue: 0.4324507566, alpha: 0.5)
         default:
-            return UIColor(red: 255, green: 20, blue: 147, alpha: 1)
+            return #colorLiteral(red: 0.9548583463, green: 0.2837072, blue: 0.5408555939, alpha: 1)
         }
     }
     
