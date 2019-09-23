@@ -35,14 +35,21 @@ class LigandsListViewController: UITableViewController {
 extension LigandsListViewController {
     
     func loadPDBFile(ligand: String) {
-        let dir = Array(ligand)[0]
-        guard let url = URL(string: "https://files.rcsb.org/ligands/\(dir)/\(ligand)/\(ligand)_ideal.pdb") else { return }
+        let directory = Array(ligand)[0]
+        guard let url = URL(string: "https://files.rcsb.org/ligands/\(directory)/\(ligand)/\(ligand)_ideal.pdb") else { return }
         print(url)
         let task = URLSession.shared.downloadTask(with: url) { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
                     if let fileContent = try? String(contentsOf: data) {
                         print(fileContent)
+                        let storyboard = UIStoryboard(name: "Ligand3DModelStoryboard", bundle: nil)
+                        let newController = storyboard.instantiateViewController(withIdentifier: "ligand2dID") as? Ligand3DModelViewController
+                        if let controller = newController {
+                            controller.ligandInfo = fileContent
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
+                    
                         //completionHandler(pdbfile)
                     }
                 }
