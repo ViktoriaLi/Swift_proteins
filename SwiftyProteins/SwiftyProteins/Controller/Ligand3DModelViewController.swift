@@ -49,7 +49,7 @@ class Ligand3DModelViewController: UIViewController {
 
     func setScene() {
         sceneView.scene = scene
-        sceneView.backgroundColor = UIColor.lightGray
+        sceneView.backgroundColor = UIColor.black
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
@@ -79,6 +79,7 @@ class Ligand3DModelViewController: UIViewController {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 25)
+        sceneView.pointOfView = cameraNode
         scene.rootNode.addChildNode(cameraNode)
     }
     
@@ -143,61 +144,9 @@ class Ligand3DModelViewController: UIViewController {
             }
             print("atomInfos2")
             print(atomInfos)
-            //scene.rootNode.pivot = SCNMatrix4MakeTranslation(0.5, 0.5, 0.5)
         }
         
-        /*var i: Int = 0
-         let atomsRange = atoms.count
-         let parent: Int = Int(elementInfo[1])! - 1
-         for element in elementInfo {
-         let child = (Int(element) ?? 0) - 1
-         if i > 1 {
-         if (parent < atomsRange && child < atomsRange) {
-         
-         let rootNode = SCNNode()
-         
-         let startNode = SCNNode()
-         let endNode = SCNNode()
-         
-         startNode.position = atoms[parent].position
-         endNode.position = atoms[child].position
-         
-         let zAxisNode = SCNNode()
-         zAxisNode.eulerAngles.x = Float(CGFloat(Double.pi / 2))
-         
-         let height = CGFloat(Float(sqrt((atoms[child].position.x - atoms[parent].position.x) * (atoms[child].position.x - atoms[parent].position.x) + (atoms[child].position.y - atoms[parent].position.y) * (atoms[child].position.y - atoms[parent].position.y) + (atoms[child].position.z - atoms[parent].position.z) * (atoms[child].position.z - atoms[parent].position.z))))
-         
-         
-         
-         let node = SCNNode()
-         node.geometry = SCNCylinder(radius: 0.1, height: height)
-         
-         node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
-         node.geometry?.firstMaterial?.isDoubleSided = true
-         //node.geometry?.firstMaterial?.specular.contents = UIColor.white
-         node.position.y = Float(-height/2)
-         
-         node.position.y = Float(-height/2)
-         zAxisNode.addChildNode(node)
-         
-         zAxisNode.addChildNode(node)
-         startNode.addChildNode(zAxisNode)
-         endNode.addChildNode(zAxisNode)
-         rootNode.addChildNode(startNode)
-         rootNode.addChildNode(endNode)
-         
-         scene.rootNode.addChildNode(rootNode)
-         
-         
-         
-         
-         //let newConnection = AtomConnections(v1: (atoms[parent]?.position)!, v2: (atoms[Int(element)! - 1]?.position)!)
-         //newConnection.name = "CONECT"
-         
-         }
-         }
-         i += 1
-         }*/
+    
         
         
         /*let floor = SCNNode()
@@ -210,7 +159,7 @@ class Ligand3DModelViewController: UIViewController {
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(0, 3, 10)
         scene.rootNode.addChildNode(cameraNode)
-        sceneView.pointOfView = cameraNode
+ 
         
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
