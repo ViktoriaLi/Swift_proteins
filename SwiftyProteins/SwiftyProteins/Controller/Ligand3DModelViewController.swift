@@ -92,11 +92,35 @@ class Ligand3DModelViewController: UIViewController {
                     scene.rootNode.addChildNode(newConnection)
                 }
             }
+            sceneView.backgroundColor = UIColor.black.inverse()
         default:
             for atom in atomNodes {
-                let newNode = NodeCreator.makeAtomOriginal(from: atom)
-                atom.replaceChildNode(atom, with: newNode)
+                if let index = atomNodes.firstIndex(of: atom) {
+                    atomNodes.remove(at: index)
+                }
+                atom.removeFromParentNode()
             }
+            for atom in atomInfos {
+                let node = NodeCreator.makeAtom(with: atom)
+                scene.rootNode.addChildNode(node)
+                atomNodes.append(node)
+            }
+            for connection in connectionNodes {
+                connection.removeFromParentNode()
+                if let index = connectionNodes.firstIndex(of: connection) {
+                    connectionNodes.remove(at: index)
+                }
+                
+            }
+            
+            for atom in atomInfos {
+                for connection in atom.connections {
+                    let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    connectionNodes.append(newConnection)
+                    scene.rootNode.addChildNode(newConnection)
+                }
+            }
+            sceneView.backgroundColor = UIColor.black
         }
     }
     
@@ -215,46 +239,6 @@ class Ligand3DModelViewController: UIViewController {
             print("atomInfos2")
             print(atomInfos)
         }
-        
-    
-        
-        
-        /*let floor = SCNNode()
-        
-        floor.geometry = SCNFloor()
-        floor.position = SCNVector3(0, 0, 0)
-        scene.rootNode.addChildNode(floor)
-        
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(0, 3, 10)
-        scene.rootNode.addChildNode(cameraNode)
- 
-        
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light?.type = SCNLight.LightType.ambient
-        scene.rootNode.addChildNode(ambientLightNode)
-        
-        let omnidirectionalLightNode = SCNNode()
-        omnidirectionalLightNode.light = SCNLight()
-        omnidirectionalLightNode.position = SCNVector3(0, 5, 10)
-        omnidirectionalLightNode.light?.type = SCNLight.LightType.omni
-        scene.rootNode.addChildNode(omnidirectionalLightNode)
-        
-        let spotLightNode = SCNNode()
-        spotLightNode.light = SCNLight()
-        spotLightNode.position = SCNVector3(0, 10, 0)
-        spotLightNode.eulerAngles = SCNVector3(0 *  Float((Double.pi) / 180), 0 *  Float((Double.pi) / 180), 0 *  Float((Double.pi) / 180))
-        spotLightNode.light?.type = SCNLight.LightType.spot
-        scene.rootNode.addChildNode(spotLightNode)
-        
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5.0
-        spotLightNode.position = SCNVector3(0, 15, 0)
-        spotLightNode.eulerAngles = SCNVector3(-90 *  Float((Double.pi) / 180), 0 *  Float((Double.pi) / 180), 0 *  Float((Double.pi) / 180))
-        
-        SCNTransaction.commit()*/
     }
 
     var currentAngle: Float = 0.0
@@ -279,4 +263,15 @@ class Ligand3DModelViewController: UIViewController {
 
 extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
     
+}
+
+
+extension UIColor {
+    func inverse() -> UIColor {
+        var r:CGFloat = 0.0; var g:CGFloat = 0.0; var b:CGFloat = 0.0; var a:CGFloat = 0.0;
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return UIColor(red: 1.0-r, green: 1.0 - g, blue: 1.0 - b, alpha: a)
+        }
+        return .black // Return a default colour
+    }
 }

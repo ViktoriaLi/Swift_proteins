@@ -26,7 +26,7 @@ class NodeCreator {
         //node.geometry = SCNCone(topRadius: 0.2, bottomRadius: 0.3, height: 1)
         node.geometry = SCNBox(width: 0.6, height: 0.6, length: 0.6, chamferRadius: 0.1)
         node.position = SCNVector3(old.position.x, old.position.y, old.position.z)
-        node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: Substring(old.name!))
+        node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: Substring(old.name!)).inverse()
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
         node.name = old.name
         return node
@@ -89,7 +89,7 @@ class NodeCreator {
         let node = SCNNode()
         node.geometry = SCNTube(innerRadius: 0.1, outerRadius: 0.1, height: CGFloat(distance))
         
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.white.inverse()
         node.position.y = Float(-distance/2)
         zAxisNode.addChildNode(node)
         rootNode.addChildNode(zAxisNode)
