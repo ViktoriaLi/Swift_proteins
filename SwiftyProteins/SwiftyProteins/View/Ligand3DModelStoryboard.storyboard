@@ -19,11 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D1i-J9-BiF">
-                                <rect key="frame" x="146.5" y="108" width="121" height="29"/>
+                                <rect key="frame" x="145.5" y="108" width="123" height="29"/>
                                 <segments>
                                     <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Original"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentedControlChanged:" destination="Zqj-Cw-2pq" eventType="valueChanged" id="6qE-3d-MEt"/>
+                                </connections>
                             </segmentedControl>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgH-vZ-Wg0">
                                 <rect key="frame" x="0.0" y="156" width="414" height="706"/>
@@ -53,6 +56,7 @@
                         <outlet property="pinchGesture" destination="Ist-Jn-4sP" id="TiC-NU-5oZ"/>
                         <outlet property="rotationGesture" destination="0Ey-DX-Fxf" id="RtU-Kn-gUI"/>
                         <outlet property="sceneView" destination="UgH-vZ-Wg0" id="oCI-sF-YVH"/>
+                        <outlet property="segmentedControl" destination="D1i-J9-BiF" id="abw-3H-LHc"/>
                         <outlet property="tapGesture" destination="jjQ-GI-DqG" id="dC9-xV-uzb"/>
                     </connections>
                 </viewController>

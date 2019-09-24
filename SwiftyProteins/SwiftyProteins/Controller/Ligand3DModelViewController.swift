@@ -25,6 +25,7 @@ class Ligand3DModelViewController: UIViewController {
     var ligandInfo: String = ""
     let scene = SCNScene()
     var atomNodes = [SCNNode]()
+    var connectionNodes = [SCNNode]()
     var atomInfos = [AtomDescription]()
     
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
@@ -32,6 +33,10 @@ class Ligand3DModelViewController: UIViewController {
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
     @IBOutlet weak var rotationGesture: UIRotationGestureRecognizer!
     @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +57,45 @@ class Ligand3DModelViewController: UIViewController {
             if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
                 
                 showAtomDescription(tappedNode: tappedNode)
+            }
+        }
+    }
+    
+    
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 1:
+            for atom in atomNodes {
+                let newNode = NodeCreator.makeAtomOriginal(from: atom)
+                sceneView.scene?.rootNode.addChildNode(newNode)
+                atom.removeFromParentNode()
+                if let index = atomNodes.firstIndex(of: atom) {
+                    atomNodes.remove(at: index)
+                }
+                
+                atomNodes.append(newNode)
+                //remove from array and add new
+            }
+            for connection in connectionNodes {
+                connection.removeFromParentNode()
+                if let index = connectionNodes.firstIndex(of: connection) {
+                    connectionNodes.remove(at: index)
+                }
+                
+            }
+            
+            for atom in atomInfos {
+                for connection in atom.connections {
+                    let newConnection = NodeCreator.makeCylinderOriginal(parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    connectionNodes.append(newConnection)
+                    scene.rootNode.addChildNode(newConnection)
+                }
+            }
+        default:
+            for atom in atomNodes {
+                let newNode = NodeCreator.makeAtomOriginal(from: atom)
+                atom.replaceChildNode(atom, with: newNode)
             }
         }
     }
@@ -164,6 +208,7 @@ class Ligand3DModelViewController: UIViewController {
             for atom in atomInfos {
                 for connection in atom.connections {
                     let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    connectionNodes.append(newConnection)
                     scene.rootNode.addChildNode(newConnection)
                 }
             }

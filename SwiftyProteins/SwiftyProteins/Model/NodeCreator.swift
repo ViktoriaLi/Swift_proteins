@@ -20,6 +20,18 @@ class NodeCreator {
         node.name = String(params.type)
         return node
     }
+    
+    class func makeAtomOriginal(from old: SCNNode) -> SCNNode {
+        let node = SCNNode()
+        //node.geometry = SCNCone(topRadius: 0.2, bottomRadius: 0.3, height: 1)
+        node.geometry = SCNBox(width: 0.6, height: 0.6, length: 0.6, chamferRadius: 0.1)
+        node.position = SCNVector3(old.position.x, old.position.y, old.position.z)
+        node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: Substring(old.name!))
+        node.geometry?.firstMaterial?.specular.contents = UIColor.white
+        node.name = old.name
+        return node
+    }
+    
 
     class func cpkColor(atomType: Substring) -> UIColor {
         switch atomType {
@@ -56,6 +68,34 @@ class NodeCreator {
         default:
             return #colorLiteral(red: 0.9548583463, green: 0.2837072, blue: 0.5408555939, alpha: 1)
         }
+    }
+    
+    class func makeCylinderOriginal(parent: SCNNode, child: SCNNode) -> SCNNode {
+        let rootNode = SCNNode()
+        
+        let endNode = SCNNode()
+        
+        var distance = sqrt(pow(child.position.x - parent.position.x, 2) + pow(child.position.y - parent.position.y, 2) + pow(child.position.z - parent.position.z, 2))
+        if distance < 0 {
+            distance *= -1
+        }
+        rootNode.position = parent.position
+        endNode.position = child.position
+        rootNode.addChildNode(endNode)
+        
+        let zAxisNode = SCNNode()
+        zAxisNode.eulerAngles.x = Float(CGFloat(Double.pi / 2))
+        
+        let node = SCNNode()
+        node.geometry = SCNTube(innerRadius: 0.1, outerRadius: 0.1, height: CGFloat(distance))
+        
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
+        node.position.y = Float(-distance/2)
+        zAxisNode.addChildNode(node)
+        rootNode.addChildNode(zAxisNode)
+        rootNode.constraints = [SCNLookAtConstraint(target: child)]
+        
+        return rootNode
     }
     
     class func makeCylinder(with params: AtomDescription, parent: SCNNode, child: SCNNode) -> SCNNode {
