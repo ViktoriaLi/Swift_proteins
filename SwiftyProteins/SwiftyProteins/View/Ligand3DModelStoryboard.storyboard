@@ -24,41 +24,85 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="jjQ-GI-DqG" appends="YES" id="qFb-Yo-f54"/>
                                     <outletCollection property="gestureRecognizers" destination="Ist-Jn-4sP" appends="YES" id="ouZ-jM-h9I"/>
-                                    <outletCollection property="gestureRecognizers" destination="0Ey-DX-Fxf" appends="YES" id="pkw-WX-6Tl"/>
                                     <outletCollection property="gestureRecognizers" destination="Myx-s8-40X" appends="YES" id="boh-4k-BOy"/>
                                 </connections>
                             </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7Q-j5-WlW">
+                                <rect key="frame" x="10" y="128.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-XM-IbH">
+                                <rect key="frame" x="10" y="159.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlu-fK-RWe">
+                                <rect key="frame" x="10" y="98" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Z1-0O-0dc">
+                                <rect key="frame" x="10" y="190.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" id="0rS-lT-01J"/>
+                            <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxz-XM-IbH" secondAttribute="trailing" constant="10" id="3tG-O4-CwF"/>
+                            <constraint firstItem="R7Q-j5-WlW" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="7YF-dA-eOc"/>
+                            <constraint firstItem="R7Q-j5-WlW" firstAttribute="top" secondItem="dlu-fK-RWe" secondAttribute="bottom" constant="10" id="8XZ-to-7sJ"/>
+                            <constraint firstItem="dlu-fK-RWe" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="8zs-cf-LQB"/>
+                            <constraint firstItem="gxz-XM-IbH" firstAttribute="top" secondItem="R7Q-j5-WlW" secondAttribute="bottom" constant="10" id="ANP-jy-vMr"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" secondItem="UgH-vZ-Wg0" secondAttribute="trailing" id="KcL-R8-iZ0"/>
+                            <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R7Q-j5-WlW" secondAttribute="trailing" constant="10" id="NYn-ma-Dae"/>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" id="VCI-F1-hOh"/>
+                            <constraint firstItem="dlu-fK-RWe" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" constant="10" id="ZtM-n6-3Hg"/>
+                            <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Z1-0O-0dc" secondAttribute="trailing" constant="10" id="d4F-Q6-jXP"/>
+                            <constraint firstItem="3Z1-0O-0dc" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="phD-II-CYV"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="bottom" secondItem="UgH-vZ-Wg0" secondAttribute="bottom" id="r71-8q-Q1y"/>
+                            <constraint firstItem="gxz-XM-IbH" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="sFH-7M-Cbk"/>
+                            <constraint firstItem="3Z1-0O-0dc" firstAttribute="top" secondItem="gxz-XM-IbH" secondAttribute="bottom" constant="10" id="uHh-lR-1yw"/>
+                            <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dlu-fK-RWe" secondAttribute="trailing" constant="10" id="yaz-C6-gbN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qvn-rv-ltK"/>
                     </view>
                     <navigationItem key="navigationItem" id="eOv-Ka-bVr">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="D1i-J9-BiF">
-                            <rect key="frame" x="145.5" y="7.5" width="123" height="29"/>
+                            <rect key="frame" x="145.5" y="7.5" width="123" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="First"/>
+                                <segment title="Classic"/>
                                 <segment title="Original"/>
+                                <segment title="Eco"/>
                             </segments>
                             <connections>
                                 <action selector="segmentedControlChanged:" destination="Zqj-Cw-2pq" eventType="valueChanged" id="6qE-3d-MEt"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="VhD-KZ-AGh">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="Zqj-Cw-2pq" id="LRS-Y5-W41"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="formulaLabel" destination="3Z1-0O-0dc" id="5jT-qJ-D7g"/>
+                        <outlet property="nameLabel" destination="dlu-fK-RWe" id="9A9-3u-Fab"/>
                         <outlet property="panGesture" destination="Myx-s8-40X" id="Khc-2t-dLy"/>
+                        <outlet property="pdbxTypeLabel" destination="gxz-XM-IbH" id="tbb-aT-srD"/>
                         <outlet property="pinchGesture" destination="Ist-Jn-4sP" id="TiC-NU-5oZ"/>
-                        <outlet property="rotationGesture" destination="0Ey-DX-Fxf" id="RtU-Kn-gUI"/>
                         <outlet property="sceneView" destination="UgH-vZ-Wg0" id="oCI-sF-YVH"/>
                         <outlet property="segmentedControl" destination="D1i-J9-BiF" id="abw-3H-LHc"/>
                         <outlet property="tapGesture" destination="jjQ-GI-DqG" id="dC9-xV-uzb"/>
+                        <outlet property="typeLabel" destination="R7Q-j5-WlW" id="TSZ-Az-mBr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNM-p2-ggL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,11 +116,6 @@
                         <action selector="pinchGestureAction:" destination="Zqj-Cw-2pq" id="ddW-35-cTt"/>
                     </connections>
                 </pinchGestureRecognizer>
-                <rotationGestureRecognizer id="0Ey-DX-Fxf">
-                    <connections>
-                        <action selector="rotationAction:" destination="Zqj-Cw-2pq" id="JM4-ME-33Z"/>
-                    </connections>
-                </rotationGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="Myx-s8-40X"/>
             </objects>
             <point key="canvasLocation" x="934.78260869565224" y="43.526785714285715"/>

@@ -27,17 +27,18 @@ class Ligand3DModelViewController: UIViewController {
     var atomNodes = [SCNNode]()
     var connectionNodes = [SCNNode]()
     var atomInfos = [AtomDescription]()
-    
     var ligandCode = ""
+    var currentAngle: Float = 0.0
     
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
-    
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
-    @IBOutlet weak var rotationGesture: UIRotationGestureRecognizer!
     @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
-    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var pdbxTypeLabel: UILabel!
+    @IBOutlet weak var formulaLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,6 @@ class Ligand3DModelViewController: UIViewController {
         tapGesture.delegate = self
         pinchGesture.delegate = self
         panGesture.delegate = self
-        rotationGesture.delegate = self
         
         if ligandCode != "" {
             loadLigandDescription()
@@ -56,53 +56,38 @@ class Ligand3DModelViewController: UIViewController {
         build3DModel()
     }
     
-    @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            let location: CGPoint = sender.location(in: sceneView)
-            let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
-                
-                showAtomDescription(tappedNode: tappedNode)
-            }
-        }
+    @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
     }
-    
-    struct LigandDescription {
-        var name: String = ""
-        var type: String = ""
-        var pdbxType: String = ""
-        var formula: String = ""
-    }
-    
-    var ligandDescription = LigandDescription()
-    
-    //http://files.rcsb.org/ligands/view/001.cif
+
     func loadLigandDescription() {
         guard let url = URL(string: "http://files.rcsb.org/ligands/view/\(ligandCode).cif") else { return }
         print(url)
         let task = URLSession.shared.downloadTask(with: url) { data, response, error in
-            DispatchQueue.main.async {
+            DispatchQueue.global().async {
                 if let data = data {
                     if let fileContent = try? String(contentsOf: data) {
                         print("fileContent")
                         print(fileContent)
-                        let descriptionArray = fileContent.split(separator: "\n")
-                        for string in descriptionArray {
-                            let strArray = string.split(separator: " ")
-                            if strArray[0] == "_chem_comp.name" {
-                                self.ligandDescription.name = String(strArray[1])
-                            } else if strArray[0] == "_chem_comp.type" {
-                                self.ligandDescription.type = String(strArray[1])
-                            } else if strArray[0] == "_chem_comp.pdbx_type" {
-                                self.ligandDescription.pdbxType = String(strArray[1])
-                            } else if strArray[0] == "_chem_comp.formula" {
-                                for i in 1..<strArray.count {
-                                    self.ligandDescription.formula += String(strArray[i]) + " "
+                        DispatchQueue.main.async {
+                            let descriptionArray = fileContent.split(separator: "\n")
+                            for string in descriptionArray {
+                                let strArray = string.split(separator: " ")
+                                if strArray[0] == "_chem_comp.name" {
+                                    self.nameLabel.text = "Name: " + String(strArray[1])
+                                } else if strArray[0] == "_chem_comp.type" {
+                                    self.typeLabel.text = "Type: " + String(strArray[1])
+                                } else if strArray[0] == "_chem_comp.pdbx_type" {
+                                    self.pdbxTypeLabel.text = "PDBX Type: " + String(strArray[1])
+                                } else if strArray[0] == "_chem_comp.formula" {
+                                    var formula = ""
+                                    for i in 1..<strArray.count {
+                                        formula += String(strArray[i]) + " "
+                                    }
+                                    self.formulaLabel.text = "Formula: " + formula
+                                    break
                                 }
-                                break
                             }
                         }
-                        print(self.ligandDescription)
                     }
                 }
             }
@@ -121,7 +106,10 @@ class Ligand3DModelViewController: UIViewController {
                 if let index = atomNodes.firstIndex(of: atom) {
                     atomNodes.remove(at: index)
                 }
-                
+                formulaLabel.textColor = .black
+                typeLabel.textColor = .black
+                nameLabel.textColor = .black
+                pdbxTypeLabel.textColor = .black
                 atomNodes.append(newNode)
                 //remove from array and add new
             }
@@ -130,7 +118,6 @@ class Ligand3DModelViewController: UIViewController {
                 if let index = connectionNodes.firstIndex(of: connection) {
                     connectionNodes.remove(at: index)
                 }
-                
             }
             
             for atom in atomInfos {
@@ -150,6 +137,9 @@ class Ligand3DModelViewController: UIViewController {
             }
             for atom in atomInfos {
                 let node = NodeCreator.makeAtom(with: atom)
+                if sender.selectedSegmentIndex == 2 {
+                    node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "water")
+                }
                 scene.rootNode.addChildNode(node)
                 atomNodes.append(node)
             }
@@ -158,21 +148,26 @@ class Ligand3DModelViewController: UIViewController {
                 if let index = connectionNodes.firstIndex(of: connection) {
                     connectionNodes.remove(at: index)
                 }
-                
             }
-            
             for atom in atomInfos {
                 for connection in atom.connections {
                     let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    if sender.selectedSegmentIndex == 2 {
+                        newConnection.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "wood")
+                    }
                     connectionNodes.append(newConnection)
                     scene.rootNode.addChildNode(newConnection)
                 }
             }
             sceneView.backgroundColor = UIColor.black
+            formulaLabel.textColor = .white
+            typeLabel.textColor = .white
+            nameLabel.textColor = .white
+            pdbxTypeLabel.textColor = .white
         }
     }
     
-    func showAtomDescription(tappedNode : SCNNode) {
+    func showAtomDescription(tappedNode: SCNNode) {
         let text = SCNText(string: tappedNode.name, extrusionDepth: 0)
         let font = UIFont(name: "Futura", size: 0.5)
         text.font = font
@@ -203,7 +198,6 @@ class Ligand3DModelViewController: UIViewController {
         ambientLightNode.light!.color = UIColor(white: 0.67, alpha: 1.0)
         scene.rootNode.addChildNode(ambientLightNode)
         
-        
         let omniLightNode = SCNNode()
         omniLightNode.light = SCNLight()
         omniLightNode.light!.type = SCNLight.LightType.omni
@@ -217,23 +211,12 @@ class Ligand3DModelViewController: UIViewController {
         sceneView.addGestureRecognizer(tapGesture)
     }
     
-    var geometryNode: SCNNode = SCNNode()
-    
     func setCamera() {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 50)
         sceneView.pointOfView = cameraNode
         scene.rootNode.addChildNode(cameraNode)
-    }
-    
-    @IBAction func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
-        guard sender.view != nil else { return }
-        
-        if sender.state == .began || sender.state == .changed {
-            sender.view?.transform = (sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!
-            sender.scale = 1.0
-        }
     }
     
     func build3DModel() {
@@ -292,7 +275,17 @@ class Ligand3DModelViewController: UIViewController {
         }
     }
 
-    var currentAngle: Float = 0.0
+}
+
+extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
+    @IBAction func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        guard sender.view != nil else { return }
+        
+        if sender.state == .began || sender.state == .changed {
+            sender.view?.transform = (sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!
+            sender.scale = 1.0
+        }
+    }
     
     @objc func panGestureAction(sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: sender.view!)
@@ -306,14 +299,15 @@ class Ligand3DModelViewController: UIViewController {
         }
     }
     
-    @IBAction func rotationAction(_ sender: UIRotationGestureRecognizer) {
-        
+    @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let location: CGPoint = sender.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
+                showAtomDescription(tappedNode: tappedNode)
+            }
+        }
     }
-    
-}
-
-extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
-    
 }
 
 
@@ -323,6 +317,6 @@ extension UIColor {
         if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
             return UIColor(red: 1.0-r, green: 1.0 - g, blue: 1.0 - b, alpha: a)
         }
-        return .black // Return a default colour
+        return .black
     }
 }

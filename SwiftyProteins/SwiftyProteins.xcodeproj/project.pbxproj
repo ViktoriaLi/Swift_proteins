@@ -66,6 +66,7 @@
 		C11B3E0523337BB3004D918B /* SwiftyProteins */ = {
 			isa = PBXGroup;
 			children = (
+				C1A27FD5233B75BE009EE9A0 /* New Group */,
 				C11B3E1F23338B76004D918B /* ligands.txt */,
 				C11B3E1823337FB3004D918B /* Model */,
 				C11B3E1923337FBB004D918B /* View */,
@@ -104,6 +105,13 @@
 				C11B3E212333A764004D918B /* Ligand3DModelViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C1A27FD5233B75BE009EE9A0 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

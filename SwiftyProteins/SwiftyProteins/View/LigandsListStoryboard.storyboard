@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Ligands List View Controller-->
+        <!--Ligands-->
         <scene sceneID="Lmj-Hd-F5h">
             <objects>
                 <tableViewController storyboardIdentifier="ligandsListID" id="GfF-Mb-z4A" customClass="LigandsListViewController" customModule="SwiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                             <outlet property="delegate" destination="GfF-Mb-z4A" id="yU6-9i-0gn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="5SA-XG-nsR"/>
+                    <navigationItem key="navigationItem" title="Ligands" id="5SA-XG-nsR"/>
                     <connections>
                         <outlet property="proteinsSearchBar" destination="AN6-ak-kCw" id="dXi-SH-RLD"/>
                     </connections>
