@@ -28,6 +28,7 @@ class NodeCreator {
         node.position = SCNVector3(old.position.x, old.position.y, old.position.z)
         node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: Substring(old.name!)).inverse()
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
+        node.geometry?.firstMaterial?.lightingModel = .blinn
         node.name = old.name
         return node
     }

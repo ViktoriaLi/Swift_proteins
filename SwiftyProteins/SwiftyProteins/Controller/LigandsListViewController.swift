@@ -47,6 +47,7 @@ extension LigandsListViewController {
                         let newController = storyboard.instantiateViewController(withIdentifier: "ligand2dID") as? Ligand3DModelViewController
                         if let controller = newController {
                             controller.ligandInfo = fileContent
+                            controller.ligandCode = ligand
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
                     

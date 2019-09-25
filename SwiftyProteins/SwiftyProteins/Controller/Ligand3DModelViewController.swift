@@ -28,6 +28,8 @@ class Ligand3DModelViewController: UIViewController {
     var connectionNodes = [SCNNode]()
     var atomInfos = [AtomDescription]()
     
+    var ligandCode = ""
+    
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
@@ -45,6 +47,10 @@ class Ligand3DModelViewController: UIViewController {
         panGesture.delegate = self
         rotationGesture.delegate = self
         
+        if ligandCode != "" {
+            loadLigandDescription()
+        }
+        
         setScene()
         setCamera()
         build3DModel()
@@ -61,6 +67,48 @@ class Ligand3DModelViewController: UIViewController {
         }
     }
     
+    struct LigandDescription {
+        var name: String = ""
+        var type: String = ""
+        var pdbxType: String = ""
+        var formula: String = ""
+    }
+    
+    var ligandDescription = LigandDescription()
+    
+    //http://files.rcsb.org/ligands/view/001.cif
+    func loadLigandDescription() {
+        guard let url = URL(string: "http://files.rcsb.org/ligands/view/\(ligandCode).cif") else { return }
+        print(url)
+        let task = URLSession.shared.downloadTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    if let fileContent = try? String(contentsOf: data) {
+                        print("fileContent")
+                        print(fileContent)
+                        let descriptionArray = fileContent.split(separator: "\n")
+                        for string in descriptionArray {
+                            let strArray = string.split(separator: " ")
+                            if strArray[0] == "_chem_comp.name" {
+                                self.ligandDescription.name = String(strArray[1])
+                            } else if strArray[0] == "_chem_comp.type" {
+                                self.ligandDescription.type = String(strArray[1])
+                            } else if strArray[0] == "_chem_comp.pdbx_type" {
+                                self.ligandDescription.pdbxType = String(strArray[1])
+                            } else if strArray[0] == "_chem_comp.formula" {
+                                for i in 1..<strArray.count {
+                                    self.ligandDescription.formula += String(strArray[i]) + " "
+                                }
+                                break
+                            }
+                        }
+                        print(self.ligandDescription)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
     
     @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
         
@@ -130,8 +178,11 @@ class Ligand3DModelViewController: UIViewController {
         text.font = font
         text.flatness = 0.005
         text.alignmentMode = CATextLayerAlignmentMode.natural.rawValue
-        text.firstMaterial?.diffuse.contents = UIColor.white
-        //text.firstMaterial?.specular.contents = UIColor.black
+        if sceneView.backgroundColor == UIColor.black {
+            text.firstMaterial?.diffuse.contents = UIColor.white
+        } else {
+            text.firstMaterial?.diffuse.contents = UIColor.white.inverse()
+        }
         text.firstMaterial?.isDoubleSided = true
         let textNode = SCNNode(geometry: text)
         textNode.position = tappedNode.position

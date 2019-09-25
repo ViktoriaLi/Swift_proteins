@@ -18,18 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="D1i-J9-BiF">
-                                <rect key="frame" x="145.5" y="108" width="123" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Original"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentedControlChanged:" destination="Zqj-Cw-2pq" eventType="valueChanged" id="6qE-3d-MEt"/>
-                                </connections>
-                            </segmentedControl>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgH-vZ-Wg0">
-                                <rect key="frame" x="0.0" y="156" width="414" height="706"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="jjQ-GI-DqG" appends="YES" id="qFb-Yo-f54"/>
@@ -41,16 +31,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="D1i-J9-BiF" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" constant="20" id="IS3-3w-WoI"/>
+                            <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" id="0rS-lT-01J"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" secondItem="UgH-vZ-Wg0" secondAttribute="trailing" id="KcL-R8-iZ0"/>
-                            <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="D1i-J9-BiF" secondAttribute="bottom" constant="20" id="Q13-IG-dsO"/>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" id="VCI-F1-hOh"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="bottom" secondItem="UgH-vZ-Wg0" secondAttribute="bottom" id="r71-8q-Q1y"/>
-                            <constraint firstItem="D1i-J9-BiF" firstAttribute="centerX" secondItem="171-YU-mMh" secondAttribute="centerX" id="zcV-fv-hYk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Qvn-rv-ltK"/>
                     </view>
-                    <navigationItem key="navigationItem" id="eOv-Ka-bVr"/>
+                    <navigationItem key="navigationItem" id="eOv-Ka-bVr">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="D1i-J9-BiF">
+                            <rect key="frame" x="145.5" y="7.5" width="123" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Original"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlChanged:" destination="Zqj-Cw-2pq" eventType="valueChanged" id="6qE-3d-MEt"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="panGesture" destination="Myx-s8-40X" id="Khc-2t-dLy"/>
                         <outlet property="pinchGesture" destination="Ist-Jn-4sP" id="TiC-NU-5oZ"/>
