@@ -52,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.60805231550000005" green="0.52351803389999996" blue="1" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" id="0rS-lT-01J"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxz-XM-IbH" secondAttribute="trailing" constant="10" id="3tG-O4-CwF"/>
@@ -75,8 +75,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="eOv-Ka-bVr">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="D1i-J9-BiF">
-                            <rect key="frame" x="145.5" y="7.5" width="123" height="30"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="D1i-J9-BiF">
+                            <rect key="frame" x="114.5" y="7" width="185" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Classic"/>

@@ -57,6 +57,9 @@ class Ligand3DModelViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
+//        print("\n\n\nshared pressed\n\n\n")
+        let activityViewController = UIActivityViewController(activityItems: ["check"], applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
 
     func loadLigandDescription() {

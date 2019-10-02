@@ -12,24 +12,60 @@ class LigandsListViewController: UITableViewController {
 
     @IBOutlet weak var proteinsSearchBar: UISearchBar!
     
+    
     var proteinsList: [String] = []
     var filteredProteins: [String] = []
     
+    var activityIndicator = UIActivityIndicatorView()
+    
+    let loadMessage = "Please check wi-fi connection or correct section!"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        showActivityIndicatory()
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
         proteinsSearchBar.delegate = self
+        
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         
         if let sourceFile = Bundle.main.path(forResource: "ligands", ofType: "txt") {
             if let data = try? String(contentsOfFile: sourceFile, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) {
                 proteinsList = data.components(separatedBy: "\n")
+//                print("\n\n\n")
+//                print("proteinsList----->>>> ")
+//                print(proteinsList)
+//                print("\n\n\n")
             }
         }
         filteredProteins = proteinsList
     }
     
+    func goAlertProcessing() {
+        let alert = UIAlertController(title: "Error loading ligands", message: loadMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+            case .cancel:
+                print("cancel")
+            case .destructive:
+                print("destructive")
+            @unknown default:
+                fatalError()
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showActivityIndicatory() {
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        activityIndicator.backgroundColor = UIColor.clear
+    }
 }
 
 extension LigandsListViewController {
@@ -46,13 +82,21 @@ extension LigandsListViewController {
                         let storyboard = UIStoryboard(name: "Ligand3DModelStoryboard", bundle: nil)
                         let newController = storyboard.instantiateViewController(withIdentifier: "ligand2dID") as? Ligand3DModelViewController
                         if let controller = newController {
+                            print("\n\n\nactivity monitor here\n\n\n")
                             controller.ligandInfo = fileContent
                             controller.ligandCode = ligand
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
-                    
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.hidesWhenStopped = true
                         //completionHandler(pdbfile)
                     }
+                }
+                else {
+                    print("\n\n\n\n\n\n")
+                    print ("ERRRROOORRR")
+                    self.goAlertProcessing()
+                    print("\n\n\n\n\n\n")
                 }
             }
         }
@@ -61,6 +105,8 @@ extension LigandsListViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         loadPDBFile(ligand: filteredProteins[indexPath.row])
+        activityIndicator.startAnimating()
+        activityIndicator.backgroundColor = UIColor.clear
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int

@@ -337,7 +337,7 @@
 		C11B3E1623337BBE004D918B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W3922KQM96;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
@@ -355,7 +355,7 @@
 		C11B3E1723337BBE004D918B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W3922KQM96;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
