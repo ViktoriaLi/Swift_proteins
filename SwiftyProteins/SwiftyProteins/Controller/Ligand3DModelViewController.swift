@@ -40,6 +40,8 @@ class Ligand3DModelViewController: UIViewController {
     @IBOutlet weak var pdbxTypeLabel: UILabel!
     @IBOutlet weak var formulaLabel: UILabel!
     
+    @IBOutlet weak var elementName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,20 +75,40 @@ class Ligand3DModelViewController: UIViewController {
                         print(fileContent)
                         DispatchQueue.main.async {
                             let descriptionArray = fileContent.split(separator: "\n")
-                            for string in descriptionArray {
-                                let strArray = string.split(separator: " ")
+                            for i in 0..<descriptionArray.count {
+                                let strArray = descriptionArray[i].split(separator: " ")
                                 if strArray[0] == "_chem_comp.name" {
-                                    self.nameLabel.text = "Name: " + String(strArray[1])
-                                } else if strArray[0] == "_chem_comp.type" {
-                                    self.typeLabel.text = "Type: " + String(strArray[1])
-                                } else if strArray[0] == "_chem_comp.pdbx_type" {
-                                    self.pdbxTypeLabel.text = "PDBX Type: " + String(strArray[1])
-                                } else if strArray[0] == "_chem_comp.formula" {
-                                    var formula = ""
-                                    for i in 1..<strArray.count {
-                                        formula += String(strArray[i]) + " "
+                                    self.nameLabel.text = "Name: Unknown"
+                                    if strArray.count > 1 {
+                                        self.nameLabel.text = "Name: " + String(strArray[1]).trimmingCharacters(in: CharacterSet(charactersIn: "\""))
+                                    } else {
+                                        if descriptionArray.count > i + 1 {
+                                            self.nameLabel.text = "Name: " + descriptionArray[i + 1].trimmingCharacters(in: CharacterSet(charactersIn: "\";"))
+                                        }
                                     }
-                                    self.formulaLabel.text = "Formula: " + formula
+                                } else if strArray[0] == "_chem_comp.type" {
+                                    self.typeLabel.text = "Type: Unknown"
+                                    if strArray.count > 1 {
+                                        var type = ""
+                                        for i in 1..<strArray.count {
+                                            type += String(strArray[i]) + " "
+                                        }
+                                        self.typeLabel.text = "Type: " + type.trimmingCharacters(in: CharacterSet(charactersIn: "\""))
+                                    }
+                                } else if strArray[0] == "_chem_comp.pdbx_type" {
+                                    self.pdbxTypeLabel.text = "PDBX Type: Unknown"
+                                    if strArray.count > 1 {
+                                        self.pdbxTypeLabel.text = "PDBX Type: " + String(strArray[1])
+                                    }
+                                } else if strArray[0] == "_chem_comp.formula" {
+                                    self.formulaLabel.text = "Formula: Unknown"
+                                    if strArray.count > 1 {
+                                        var formula = ""
+                                        for i in 1..<strArray.count {
+                                            formula += String(strArray[i]) + " "
+                                        }
+                                        self.formulaLabel.text = "Formula: " + formula.trimmingCharacters(in: CharacterSet(charactersIn: "\""))
+                                    }
                                     break
                                 }
                             }
@@ -139,9 +161,11 @@ class Ligand3DModelViewController: UIViewController {
                 atom.removeFromParentNode()
             }
             for atom in atomInfos {
-                let node = NodeCreator.makeAtom(with: atom)
+                var node = SCNNode()
                 if sender.selectedSegmentIndex == 2 {
-                    node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "water")
+                    node = NodeCreator.makeAtom(with: atom, style: .eco)
+                } else {
+                    node = NodeCreator.makeAtom(with: atom, style: .classic)
                 }
                 scene.rootNode.addChildNode(node)
                 atomNodes.append(node)
@@ -154,9 +178,11 @@ class Ligand3DModelViewController: UIViewController {
             }
             for atom in atomInfos {
                 for connection in atom.connections {
-                    let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    var newConnection = SCNNode()
                     if sender.selectedSegmentIndex == 2 {
-                        newConnection.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "wood")
+                        newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1], style: .eco)
+                    } else {
+                        newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1], style: .classic)
                     }
                     connectionNodes.append(newConnection)
                     scene.rootNode.addChildNode(newConnection)
@@ -237,7 +263,7 @@ class Ligand3DModelViewController: UIViewController {
                     atom.z = Double(elementInfo[8])!
                     atom.type = elementInfo[11]
                     atomInfos.append(atom)
-                    let node = NodeCreator.makeAtom(with: atom)
+                    let node = NodeCreator.makeAtom(with: atom, style: .classic)
                     scene.rootNode.addChildNode(node)
                     atomNodes.append(node)
                 }
@@ -268,7 +294,7 @@ class Ligand3DModelViewController: UIViewController {
             
             for atom in atomInfos {
                 for connection in atom.connections {
-                    let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1])
+                    let newConnection = NodeCreator.makeCylinder(with: atom, parent: atomNodes[atom.number - 1], child: atomNodes[connection - 1], style: .classic)
                     connectionNodes.append(newConnection)
                     scene.rootNode.addChildNode(newConnection)
                 }
@@ -308,8 +334,13 @@ extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
                 showAtomDescription(tappedNode: tappedNode)
+                showElementName(name: "TEST")
             }
         }
+    }
+    
+    func showElementName(name: String) {
+        //elementName.text = name
     }
 }
 

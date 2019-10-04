@@ -9,13 +9,21 @@
 import UIKit
 import SceneKit
 
+enum ModelDesign {
+    case classic, inverse, eco
+}
+
 class NodeCreator {
     
-    class func makeAtom(with params: AtomDescription) -> SCNNode {
+    class func makeAtom(with params: AtomDescription, style: ModelDesign) -> SCNNode {
         let node = SCNNode()
         node.geometry = SCNSphere(radius: 0.3)
         node.position = SCNVector3(params.x, params.y, params.z)
-        node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: params.type)
+        if style == .classic {
+            node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: params.type)
+        } else {
+            node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "water")
+        }
         node.geometry?.firstMaterial?.specular.contents = UIColor.white
         node.name = String(params.type)
         return node
@@ -99,7 +107,7 @@ class NodeCreator {
         return rootNode
     }
     
-    class func makeCylinder(with params: AtomDescription, parent: SCNNode, child: SCNNode) -> SCNNode {
+    class func makeCylinder(with params: AtomDescription, parent: SCNNode, child: SCNNode, style: ModelDesign) -> SCNNode {
         let rootNode = SCNNode()
         
         let endNode = SCNNode()
@@ -118,7 +126,11 @@ class NodeCreator {
         let node = SCNNode()
         node.geometry = SCNCylinder(radius: 0.1, height: CGFloat(distance))
         
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
+        if style == .classic {
+            node.geometry?.firstMaterial?.diffuse.contents = UIColor.white
+        } else {
+            node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "wood")
+        }
         node.position.y = Float(-distance/2)
         zAxisNode.addChildNode(node)
         rootNode.addChildNode(zAxisNode)
