@@ -29,6 +29,7 @@ class Ligand3DModelViewController: UIViewController {
     var atomInfos = [AtomDescription]()
     var ligandCode = ""
     var currentAngle: Float = 0.0
+    var ifPresent = false
     
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
@@ -153,6 +154,7 @@ class Ligand3DModelViewController: UIViewController {
                 }
             }
             sceneView.backgroundColor = UIColor.black.inverse()
+            elementName.textColor = UIColor.black
         default:
             for atom in atomNodes {
                 if let index = atomNodes.firstIndex(of: atom) {
@@ -189,6 +191,7 @@ class Ligand3DModelViewController: UIViewController {
                 }
             }
             sceneView.backgroundColor = UIColor.black
+            elementName.textColor = UIColor.white
             formulaLabel.textColor = .white
             typeLabel.textColor = .white
             nameLabel.textColor = .white
@@ -334,16 +337,100 @@ extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty, let tappedNode = hits.first?.node, tappedNode.name != nil {
                 showAtomDescription(tappedNode: tappedNode)
-                showElementName(name: "TEST")
+                if tappedNode.name != nil {
+                    showElementName(name: getElementFullName(shortName: tappedNode.name!))
+                }
             }
         }
     }
     
+    func getElementFullName(shortName: String) -> String {
+        switch shortName {
+        case "H":
+            return "Hydrogen"
+        case "C":
+            return "Carbon"
+        case "N":
+            return "Nitrogen"
+        case "O":
+            return "Oxygen"
+        case "F":
+            return "Fluorine"
+        case "Cl":
+            return "Chlorine"
+        case "Br":
+            return "Bromine"
+        case "I":
+            return "Iodine"
+        case "He":
+            return "Helium"
+        case "Ne":
+            return "Neon"
+        case "Ar":
+            return "Argon"
+        case "Xe":
+            return "Xenon"
+        case "Kr":
+            return "Krypton"
+        case "P":
+            return "Phosphorus"
+        case "S":
+            return "Sulfur"
+        case "B":
+            return "Boron"
+        case "Li":
+            return "Lithium"
+        case "Na":
+            return "Sodium"
+        case "K":
+            return "Potassium"
+        case "Rb":
+            return "Rubidium"
+        case "Cs":
+            return "Caesium"
+        case "Fr":
+            return "Francium"
+        case "Be":
+            return "Beryllium"
+        case "Mg":
+            return "Magnesium"
+        case "Ca":
+            return "Calcium"
+        case "Sr":
+            return "Strontium"
+        case "Ba":
+            return "Barium"
+        case "Ra":
+            return "Radium"
+        case "Ti":
+            return "Titanium"
+        case "Fe":
+            return "Ferrum"
+        default:
+            return "Unknown"
+        }
+    }
+    
     func showElementName(name: String) {
-        //elementName.text = name
+        elementName.text = name
+        ifPresent = false
+        self.elementName.isHidden = true
+        UIView.animate(withDuration: 1, animations: {
+            self.elementName.isHidden = false
+            self.ifPresent = true
+        })
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            if self.ifPresent == true {
+                self.elementName.isHidden = true
+                self.ifPresent = false
+            }
+        }
     }
 }
 
+enum Elements {
+    
+}
 
 extension UIColor {
     func inverse() -> UIColor {
