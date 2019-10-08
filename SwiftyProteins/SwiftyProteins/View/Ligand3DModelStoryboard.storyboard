@@ -51,30 +51,53 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtO-8a-WcL">
-                                <rect key="frame" x="186" y="845" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Det-Tw-1hP">
+                                <rect key="frame" x="163" y="842" width="88" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtO-8a-WcL">
+                                        <rect key="frame" x="0.0" y="11.5" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oar-Ur-KHk">
+                                        <rect key="frame" x="52" y="7" width="36" height="30"/>
+                                        <state key="normal" title="More">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="moreButtonTapped:" destination="Zqj-Cw-2pq" eventType="touchUpInside" id="cYF-5l-X6h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="oar-Ur-KHk" firstAttribute="centerY" secondItem="Det-Tw-1hP" secondAttribute="centerY" id="I91-Rc-cfk"/>
+                                    <constraint firstItem="NtO-8a-WcL" firstAttribute="centerY" secondItem="Det-Tw-1hP" secondAttribute="centerY" id="LYE-5H-yAL"/>
+                                    <constraint firstItem="oar-Ur-KHk" firstAttribute="leading" secondItem="NtO-8a-WcL" secondAttribute="trailing" constant="10" id="NIk-Md-T8D"/>
+                                    <constraint firstAttribute="trailing" secondItem="oar-Ur-KHk" secondAttribute="trailing" id="WuC-xq-1R9"/>
+                                    <constraint firstAttribute="height" constant="44" id="dYr-3E-Gg1"/>
+                                    <constraint firstItem="NtO-8a-WcL" firstAttribute="leading" secondItem="Det-Tw-1hP" secondAttribute="leading" id="zTS-MD-nAR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.60805231550000005" green="0.52351803389999996" blue="1" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Det-Tw-1hP" secondAttribute="bottom" constant="10" id="0Hc-XZ-lJX"/>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" id="0rS-lT-01J"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxz-XM-IbH" secondAttribute="trailing" constant="10" id="3tG-O4-CwF"/>
                             <constraint firstItem="R7Q-j5-WlW" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="7YF-dA-eOc"/>
                             <constraint firstItem="R7Q-j5-WlW" firstAttribute="top" secondItem="dlu-fK-RWe" secondAttribute="bottom" constant="10" id="8XZ-to-7sJ"/>
                             <constraint firstItem="dlu-fK-RWe" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="8zs-cf-LQB"/>
                             <constraint firstItem="gxz-XM-IbH" firstAttribute="top" secondItem="R7Q-j5-WlW" secondAttribute="bottom" constant="10" id="ANP-jy-vMr"/>
-                            <constraint firstItem="NtO-8a-WcL" firstAttribute="bottom" secondItem="UgH-vZ-Wg0" secondAttribute="bottom" constant="-30" id="GvQ-1A-Kwo"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" secondItem="UgH-vZ-Wg0" secondAttribute="trailing" id="KcL-R8-iZ0"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R7Q-j5-WlW" secondAttribute="trailing" constant="10" id="NYn-ma-Dae"/>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" id="VCI-F1-hOh"/>
                             <constraint firstItem="dlu-fK-RWe" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" constant="10" id="ZtM-n6-3Hg"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Z1-0O-0dc" secondAttribute="trailing" constant="10" id="d4F-Q6-jXP"/>
+                            <constraint firstItem="Det-Tw-1hP" firstAttribute="centerX" secondItem="171-YU-mMh" secondAttribute="centerX" id="ok3-6l-YBc"/>
                             <constraint firstItem="3Z1-0O-0dc" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="phD-II-CYV"/>
                             <constraint firstAttribute="bottom" secondItem="UgH-vZ-Wg0" secondAttribute="bottom" id="r71-8q-Q1y"/>
-                            <constraint firstItem="NtO-8a-WcL" firstAttribute="centerX" secondItem="171-YU-mMh" secondAttribute="centerX" id="s5N-em-XRk"/>
                             <constraint firstItem="gxz-XM-IbH" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="sFH-7M-Cbk"/>
                             <constraint firstItem="3Z1-0O-0dc" firstAttribute="top" secondItem="gxz-XM-IbH" secondAttribute="bottom" constant="10" id="uHh-lR-1yw"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dlu-fK-RWe" secondAttribute="trailing" constant="10" id="yaz-C6-gbN"/>
@@ -102,8 +125,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="elementInfoView" destination="Det-Tw-1hP" id="vRB-2C-ZoG"/>
                         <outlet property="elementName" destination="NtO-8a-WcL" id="Yk8-Ue-XLm"/>
                         <outlet property="formulaLabel" destination="3Z1-0O-0dc" id="5jT-qJ-D7g"/>
+                        <outlet property="moreButton" destination="oar-Ur-KHk" id="L5W-Nr-RnF"/>
                         <outlet property="nameLabel" destination="dlu-fK-RWe" id="9A9-3u-Fab"/>
                         <outlet property="panGesture" destination="Myx-s8-40X" id="Khc-2t-dLy"/>
                         <outlet property="pdbxTypeLabel" destination="gxz-XM-IbH" id="tbb-aT-srD"/>
