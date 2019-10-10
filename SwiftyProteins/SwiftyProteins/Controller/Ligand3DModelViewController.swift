@@ -42,12 +42,6 @@ class Ligand3DModelViewController: UIViewController {
     @IBOutlet weak var formulaLabel: UILabel!
     
     @IBOutlet weak var elementName: UILabel!
-    @IBOutlet weak var moreButton: UIButton!
-    
-    @IBOutlet weak var elementInfoView: UIView!
-    @IBAction func moreButtonTapped(_ sender: UIButton) {
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -420,14 +414,14 @@ extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
     func showElementName(name: String) {
         elementName.text = name
         ifPresent = false
-        self.elementInfoView.isHidden = true
+        self.elementName.isHidden = true
         UIView.animate(withDuration: 1, animations: {
-            self.elementInfoView.isHidden = false
+            self.elementName.isHidden = false
             self.ifPresent = true
         })
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             if self.ifPresent == true {
-                self.elementInfoView.isHidden = true
+                self.elementName.isHidden = true
                 self.ifPresent = false
             }
         }

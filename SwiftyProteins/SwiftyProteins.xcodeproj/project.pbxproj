@@ -18,7 +18,6 @@
 		C11B3E222333A764004D918B /* Ligand3DModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E212333A764004D918B /* Ligand3DModelViewController.swift */; };
 		C11B3E242333A7D3004D918B /* Ligand3DModelStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11B3E232333A7D3004D918B /* Ligand3DModelStoryboard.storyboard */; };
 		C1A27FD42338C73F009EE9A0 /* NodeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A27FD32338C73F009EE9A0 /* NodeCreator.swift */; };
-		C1A27FE02348DC90009EE9A0 /* ElementInfoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1A27FDF2348DC90009EE9A0 /* ElementInfoStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +34,6 @@
 		C11B3E212333A764004D918B /* Ligand3DModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ligand3DModelViewController.swift; sourceTree = "<group>"; };
 		C11B3E232333A7D3004D918B /* Ligand3DModelStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ligand3DModelStoryboard.storyboard; sourceTree = "<group>"; };
 		C1A27FD32338C73F009EE9A0 /* NodeCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeCreator.swift; sourceTree = "<group>"; };
-		C1A27FDF2348DC90009EE9A0 /* ElementInfoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ElementInfoStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +93,6 @@
 				C11B3E0A23337BB3004D918B /* Main.storyboard */,
 				C11B3E1B23338006004D918B /* LigandsListStoryboard.storyboard */,
 				C11B3E232333A7D3004D918B /* Ligand3DModelStoryboard.storyboard */,
-				C1A27FDF2348DC90009EE9A0 /* ElementInfoStoryboard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,7 +177,6 @@
 				C11B3E1123337BBE004D918B /* LaunchScreen.storyboard in Resources */,
 				C11B3E0E23337BBE004D918B /* Assets.xcassets in Resources */,
 				C11B3E0C23337BB3004D918B /* Main.storyboard in Resources */,
-				C1A27FE02348DC90009EE9A0 /* ElementInfoStoryboard.storyboard in Resources */,
 				C11B3E242333A7D3004D918B /* Ligand3DModelStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

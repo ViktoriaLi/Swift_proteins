@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftyProteins/Controller/Ligand3DModelViewController.swift"
+            timestampString = "592393657.570123"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "showElementName(name:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftyProteins.Ligand3DModelViewController.showElementName(name: Swift.String) -&gt; ()"
+                  moduleName = "SwiftyProteins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vlikhotk/Swift_proteins/SwiftyProteins/SwiftyProteins/Controller/Ligand3DModelViewController.swift"
+                  timestampString = "592394010.439281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "422"
+                  endingLineNumber = "422"
+                  offsetFromSymbolStart = "1110">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in SwiftyProteins.Ligand3DModelViewController.showElementName(name: Swift.String) -&gt; ()"
+                  moduleName = "SwiftyProteins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vlikhotk/Swift_proteins/SwiftyProteins/SwiftyProteins/Controller/Ligand3DModelViewController.swift"
+                  timestampString = "592394010.4414361"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "423"
+                  endingLineNumber = "423"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
