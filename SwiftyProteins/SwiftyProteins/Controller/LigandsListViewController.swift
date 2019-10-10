@@ -12,7 +12,6 @@ class LigandsListViewController: UITableViewController {
 
     @IBOutlet weak var proteinsSearchBar: UISearchBar!
     
-    
     var proteinsList: [String] = []
     var filteredProteins: [String] = []
     
@@ -33,10 +32,6 @@ class LigandsListViewController: UITableViewController {
         if let sourceFile = Bundle.main.path(forResource: "ligands", ofType: "txt") {
             if let data = try? String(contentsOfFile: sourceFile, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) {
                 proteinsList = data.components(separatedBy: "\n")
-//                print("\n\n\n")
-//                print("proteinsList----->>>> ")
-//                print(proteinsList)
-//                print("\n\n\n")
             }
         }
         filteredProteins = proteinsList

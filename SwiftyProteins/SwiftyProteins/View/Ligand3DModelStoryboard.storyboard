@@ -57,11 +57,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCL-bA-6KV">
+                                <rect key="frame" x="238" y="841" width="36" height="30"/>
+                                <state key="normal" title="More"/>
+                                <connections>
+                                    <action selector="moreButtonTapped:" destination="Zqj-Cw-2pq" eventType="touchUpInside" id="ixt-ia-Tko"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.60805231550000005" green="0.52351803389999996" blue="1" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.58788041145722436" green="0.52151474486022331" blue="0.97016984224319458" alpha="0.642578125" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" id="0rS-lT-01J"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxz-XM-IbH" secondAttribute="trailing" constant="10" id="3tG-O4-CwF"/>
+                            <constraint firstItem="lCL-bA-6KV" firstAttribute="leading" secondItem="NtO-8a-WcL" secondAttribute="trailing" constant="10" id="4gc-DI-gcf"/>
                             <constraint firstItem="R7Q-j5-WlW" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="7YF-dA-eOc"/>
                             <constraint firstItem="R7Q-j5-WlW" firstAttribute="top" secondItem="dlu-fK-RWe" secondAttribute="bottom" constant="10" id="8XZ-to-7sJ"/>
                             <constraint firstItem="dlu-fK-RWe" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="8zs-cf-LQB"/>
@@ -72,6 +80,7 @@
                             <constraint firstItem="UgH-vZ-Wg0" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" id="VCI-F1-hOh"/>
                             <constraint firstItem="dlu-fK-RWe" firstAttribute="top" secondItem="Qvn-rv-ltK" secondAttribute="top" constant="10" id="ZtM-n6-3Hg"/>
                             <constraint firstItem="Qvn-rv-ltK" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Z1-0O-0dc" secondAttribute="trailing" constant="10" id="d4F-Q6-jXP"/>
+                            <constraint firstItem="UgH-vZ-Wg0" firstAttribute="bottom" secondItem="lCL-bA-6KV" secondAttribute="bottom" constant="25" id="pdR-0t-kvN"/>
                             <constraint firstItem="3Z1-0O-0dc" firstAttribute="leading" secondItem="Qvn-rv-ltK" secondAttribute="leading" constant="10" id="phD-II-CYV"/>
                             <constraint firstAttribute="bottom" secondItem="UgH-vZ-Wg0" secondAttribute="bottom" id="r71-8q-Q1y"/>
                             <constraint firstItem="NtO-8a-WcL" firstAttribute="centerX" secondItem="171-YU-mMh" secondAttribute="centerX" id="s5N-em-XRk"/>
@@ -104,6 +113,7 @@
                     <connections>
                         <outlet property="elementName" destination="NtO-8a-WcL" id="Yk8-Ue-XLm"/>
                         <outlet property="formulaLabel" destination="3Z1-0O-0dc" id="5jT-qJ-D7g"/>
+                        <outlet property="moreButton" destination="lCL-bA-6KV" id="qVd-T3-sWj"/>
                         <outlet property="nameLabel" destination="dlu-fK-RWe" id="9A9-3u-Fab"/>
                         <outlet property="panGesture" destination="Myx-s8-40X" id="Khc-2t-dLy"/>
                         <outlet property="pdbxTypeLabel" destination="gxz-XM-IbH" id="tbb-aT-srD"/>

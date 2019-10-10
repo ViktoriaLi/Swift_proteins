@@ -30,6 +30,7 @@ class Ligand3DModelViewController: UIViewController {
     var ligandCode = ""
     var currentAngle: Float = 0.0
     var ifPresent = false
+    var currentTapped = ""
     
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
@@ -42,6 +43,32 @@ class Ligand3DModelViewController: UIViewController {
     @IBOutlet weak var formulaLabel: UILabel!
     
     @IBOutlet weak var elementName: UILabel!
+    @IBOutlet weak var moreButton: UIButton!
+    
+    var elementsInfo = [ElementModel.Element]()
+    
+    @IBAction func moreButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "ElementDescription", bundle: nil)
+        let newController = storyboard.instantiateViewController(withIdentifier: "elementID") as? ElementDescriptionViewController
+        if let controller = newController {
+            let newElement = findElement()
+            if newElement != nil {
+                controller.element = newElement
+                self.navigationController?.pushViewController(controller, animated: true)
+            } else {
+                //show alert something wrong
+            }
+        }  
+    }
+    
+    func findElement() -> ElementModel.Element? {
+        for element in elementsInfo {
+            if currentTapped == element.symbol {
+                return element
+            }
+        }
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +80,25 @@ class Ligand3DModelViewController: UIViewController {
         if ligandCode != "" {
             loadLigandDescription()
         }
-        
+        getElementsInfo()
         setScene()
         setCamera()
         build3DModel()
+    }
+    
+    func getElementsInfo() {
+        if let sourceFile = Bundle.main.path(forResource: "PeriodicTableJSON", ofType: "json") {
+            if let data = try? String(contentsOfFile: sourceFile, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) {
+                print("data")
+                print(data)
+                let jsonData = data.data(using: .utf8)!
+                print("jsonData")
+                print(jsonData)
+                if let elementsStruct = try? JSONDecoder().decode(ElementModel.self, from: jsonData) {
+                    elementsInfo = elementsStruct.elements
+                }
+            }
+        }
     }
     
     @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
@@ -199,7 +241,11 @@ class Ligand3DModelViewController: UIViewController {
         }
     }
     
+    
     func showAtomDescription(tappedNode: SCNNode) {
+        if tappedNode.name != nil {
+            currentTapped = tappedNode.name!
+        }
         let text = SCNText(string: tappedNode.name, extrusionDepth: 0)
         let font = UIFont(name: "Futura", size: 0.5)
         text.font = font
@@ -415,13 +461,16 @@ extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
         elementName.text = name
         ifPresent = false
         self.elementName.isHidden = true
+        moreButton.isHidden = true
         UIView.animate(withDuration: 1, animations: {
             self.elementName.isHidden = false
+            self.moreButton.isHidden = false
             self.ifPresent = true
         })
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             if self.ifPresent == true {
                 self.elementName.isHidden = true
+                self.moreButton.isHidden = true
                 self.ifPresent = false
             }
         }

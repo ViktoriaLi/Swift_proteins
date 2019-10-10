@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A95041E3234F3BBD009E706D /* PeriodicTableJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = A95041E2234F3BBD009E706D /* PeriodicTableJSON.json */; };
+		A95041E5234F3C47009E706D /* ElementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95041E4234F3C47009E706D /* ElementModel.swift */; };
+		A95041E7234F695A009E706D /* ElementDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95041E6234F695A009E706D /* ElementDescriptionViewController.swift */; };
+		A95041E9234F696B009E706D /* ElementDescription.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95041E8234F696B009E706D /* ElementDescription.storyboard */; };
 		C11B3E0723337BB3004D918B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E0623337BB3004D918B /* AppDelegate.swift */; };
 		C11B3E0923337BB3004D918B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11B3E0823337BB3004D918B /* SignInViewController.swift */; };
 		C11B3E0C23337BB3004D918B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C11B3E0A23337BB3004D918B /* Main.storyboard */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A95041E2234F3BBD009E706D /* PeriodicTableJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PeriodicTableJSON.json; sourceTree = "<group>"; };
+		A95041E4234F3C47009E706D /* ElementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementModel.swift; sourceTree = "<group>"; };
+		A95041E6234F695A009E706D /* ElementDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementDescriptionViewController.swift; sourceTree = "<group>"; };
+		A95041E8234F696B009E706D /* ElementDescription.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ElementDescription.storyboard; sourceTree = "<group>"; };
 		C11B3E0323337BB3004D918B /* SwiftyProteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyProteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11B3E0623337BB3004D918B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C11B3E0823337BB3004D918B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -66,8 +74,8 @@
 		C11B3E0523337BB3004D918B /* SwiftyProteins */ = {
 			isa = PBXGroup;
 			children = (
-				C1A27FD5233B75BE009EE9A0 /* New Group */,
 				C11B3E1F23338B76004D918B /* ligands.txt */,
+				A95041E2234F3BBD009E706D /* PeriodicTableJSON.json */,
 				C11B3E1823337FB3004D918B /* Model */,
 				C11B3E1923337FBB004D918B /* View */,
 				C11B3E1A23337FC0004D918B /* Controller */,
@@ -83,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C1A27FD32338C73F009EE9A0 /* NodeCreator.swift */,
+				A95041E4234F3C47009E706D /* ElementModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,6 +102,7 @@
 				C11B3E0A23337BB3004D918B /* Main.storyboard */,
 				C11B3E1B23338006004D918B /* LigandsListStoryboard.storyboard */,
 				C11B3E232333A7D3004D918B /* Ligand3DModelStoryboard.storyboard */,
+				A95041E8234F696B009E706D /* ElementDescription.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,15 +113,9 @@
 				C11B3E0823337BB3004D918B /* SignInViewController.swift */,
 				C11B3E1D23338024004D918B /* LigandsListViewController.swift */,
 				C11B3E212333A764004D918B /* Ligand3DModelViewController.swift */,
+				A95041E6234F695A009E706D /* ElementDescriptionViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		C1A27FD5233B75BE009EE9A0 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +178,10 @@
 			files = (
 				C11B3E1C23338006004D918B /* LigandsListStoryboard.storyboard in Resources */,
 				C11B3E2023338B77004D918B /* ligands.txt in Resources */,
+				A95041E9234F696B009E706D /* ElementDescription.storyboard in Resources */,
 				C11B3E1123337BBE004D918B /* LaunchScreen.storyboard in Resources */,
 				C11B3E0E23337BBE004D918B /* Assets.xcassets in Resources */,
+				A95041E3234F3BBD009E706D /* PeriodicTableJSON.json in Resources */,
 				C11B3E0C23337BB3004D918B /* Main.storyboard in Resources */,
 				C11B3E242333A7D3004D918B /* Ligand3DModelStoryboard.storyboard in Resources */,
 			);
@@ -188,11 +194,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A95041E5234F3C47009E706D /* ElementModel.swift in Sources */,
 				C11B3E1E23338024004D918B /* LigandsListViewController.swift in Sources */,
 				C11B3E0923337BB3004D918B /* SignInViewController.swift in Sources */,
 				C1A27FD42338C73F009EE9A0 /* NodeCreator.swift in Sources */,
 				C11B3E222333A764004D918B /* Ligand3DModelViewController.swift in Sources */,
 				C11B3E0723337BB3004D918B /* AppDelegate.swift in Sources */,
+				A95041E7234F695A009E706D /* ElementDescriptionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
