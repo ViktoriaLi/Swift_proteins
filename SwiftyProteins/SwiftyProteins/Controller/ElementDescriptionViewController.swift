@@ -32,16 +32,17 @@ class ElementDescriptionViewController: UIViewController {
     }
     
     func displayInfo() {
-        nameLabel.text = element?.name ?? "Unknown"
-        appearanceLabel.text = element?.appearance ?? "Unknown"
-        atomicMassLabel.text = String(element!.atomicMass ?? 0)
-        boilLabel.text =  String(element?.boil ?? 0)
-        categoryLabel.text = element?.category ?? "Unknown"
-        densityLabel.text =  String(element?.density ?? 0)
-        discoveredByLabel.text = element?.discoveredBy ?? "Unknown"
-        meltLabel.text =  String(element?.melt ?? 0)
-        molarHeatLabel.text =  String(element?.molarHeat ?? 0)
-        phaseLabel.text = element?.phase ?? "Unknown"
-        descriptionLabel.text = element?.summary ?? "Unknown"
+        nameLabel.text = "Name: " + (element?.name ?? "Unknown")
+        appearanceLabel.text = "Appearance: " + (element?.appearance ?? "Unknown")
+        atomicMassLabel.text = "Atomic mass: " + String(element!.atomicMass ?? 0)
+        boilLabel.text =  "Boil: " + String(element?.boil ?? 0)
+        categoryLabel.text = "Category: " + (element?.category ?? "Unknown")
+        densityLabel.text =  "Density: " + String(element?.density ?? 0)
+        discoveredByLabel.text = "Discovered by: " + (element?.discoveredBy ?? "Unknown")
+        meltLabel.text =  "Melt: " + String(element?.melt ?? 0)
+        molarHeatLabel.text =  "Molar heat: " + String(element?.molarHeat ?? 0)
+        phaseLabel.text = "Phase: " + (element?.phase ?? "Unknown")
+        descriptionLabel.text = "Description: " + (element?.summary ?? "Unknown")
     }
 }
+
