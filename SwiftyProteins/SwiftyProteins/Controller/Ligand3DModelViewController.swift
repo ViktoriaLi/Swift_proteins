@@ -70,6 +70,16 @@ class Ligand3DModelViewController: UIViewController {
         return nil
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        NotificationCenter.default.addObserver(self, selector: #selector(shareButtonTapped), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,6 +94,7 @@ class Ligand3DModelViewController: UIViewController {
         setScene()
         setCamera()
         build3DModel()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
     }
     
     func getElementsInfo() {
@@ -102,9 +113,32 @@ class Ligand3DModelViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) {
-//        print("\n\n\nshared pressed\n\n\n")
-        let activityViewController = UIActivityViewController(activityItems: ["check"], applicationActivities: nil)
-        present(activityViewController, animated: true)
+        let bounds = UIScreen.main.bounds
+        UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
+        self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        DispatchQueue.main.async {
+            self.present(activityViewController, animated: true, completion: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+        activityViewController.completionWithItemsHandler = { activity, completed, items, error in
+            if completed {
+                self.showAlertController("Your photo was uploaded successfully.")
+            }
+            else if error != nil{
+                self.showAlertController("Some error occurred. Please try again.")
+            }
+        }
+        
+    }
+    func showAlertController(_ message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
     func loadLigandDescription() {
