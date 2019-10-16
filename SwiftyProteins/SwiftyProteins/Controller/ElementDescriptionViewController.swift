@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 class ElementDescriptionViewController: UIViewController {
 
@@ -29,6 +30,13 @@ class ElementDescriptionViewController: UIViewController {
         if element != nil {
             displayInfo()
         }
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func displayInfo() {

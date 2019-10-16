@@ -46,7 +46,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>NSPhotoLibraryAddUsageDescription</string>
 	</array>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Our application needs permission to write photos...</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to unlock the ligands</string>
 </dict>
 </plist>

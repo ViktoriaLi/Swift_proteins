@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NotificationCenter
 
 class LigandsListViewController: UITableViewController {
 
@@ -26,6 +27,8 @@ class LigandsListViewController: UITableViewController {
         activityIndicator.hidesWhenStopped = true
         proteinsSearchBar.delegate = self
         
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         
@@ -36,6 +39,11 @@ class LigandsListViewController: UITableViewController {
         }
         filteredProteins = proteinsList
     }
+    
+    @objc func appMovedToBackground() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     func goAlertProcessing() {
         let alert = UIAlertController(title: "Error loading ligands", message: loadMessage, preferredStyle: .alert)
@@ -66,6 +74,7 @@ class LigandsListViewController: UITableViewController {
 extension LigandsListViewController {
     
     func loadPDBFile(ligand: String) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let directory = Array(ligand)[0]
         guard let url = URL(string: "https://files.rcsb.org/ligands/\(directory)/\(ligand)/\(ligand)_ideal.pdb") else { return }
         print(url)
@@ -82,6 +91,7 @@ extension LigandsListViewController {
                             controller.ligandCode = ligand
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.hidesWhenStopped = true
                         //completionHandler(pdbfile)
@@ -90,6 +100,9 @@ extension LigandsListViewController {
                 else {
                     print("\n\n\n\n\n\n")
                     print ("ERRRROOORRR")
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
                     self.goAlertProcessing()
                     print("\n\n\n\n\n\n")
                 }

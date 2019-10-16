@@ -9,49 +9,92 @@
 import UIKit
 import LocalAuthentication
 
-class SignInViewController: UIViewController {
+protocol SuccessAuth {
+    func goToLigands()
+}
 
-    let myContext = LAContext()
-    let myLocalizedReasonString = "Biometric Authntication testing !! "
-    var authError: NSError?
+class SignInViewController: UIViewController, SuccessAuth {
+
+    let touchMe = BiometricIDAuth()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var touchIDButton: UIButton!
     
+    @IBAction func toichIDAction(_ sender: UIButton) {
+        touchAction()
     }
-
-    @IBAction func signInButtonTapped(_ sender: UIButton) {
-        
+    
+    func touchAction() {
+        touchMe.authenticateUser() { [weak self] message in
+            if message != nil {
+                let alertView = UIAlertController(title: "Go to Sign in",
+                                                  message: message,
+                                                  preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Darn!", style: .default)
+                alertView.addAction(okAction)
+                self?.present(alertView, animated: true)
+                
+            } else {
+                /*let alertView = UIAlertController(title: "You can try this optionon real device",
+                                                  message: message,
+                                                  preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Darn!", style: .default)
+                alertView.addAction(okAction)
+                self?.present(alertView, animated: true)*/
+                self?.goToLigands()
+            }
+        }
+    }
+    
+    func goToLigands() {
         let storyboard = UIStoryboard(name: "LigandsListStoryboard", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "ligandsListID") as? LigandsListViewController
         if let controller = newController {
             self.navigationController?.pushViewController(controller, animated: true)
-            loginWithTouchID()
         }
     }
     
-    func loginWithTouchID() {
-        if #available(iOS 8.0, macOS 10.12.1, *) {
-            if myContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-                myContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: myLocalizedReasonString) { success, evaluateError in
-                    DispatchQueue.main.async {
-                        if success {
-//                            self.successLabel.text = "Awesome!!... User authenticated successfully"
-                            print("\n\n\nAwesome!!... User authenticated successfully\n\n\n")
-                        } else {
-//                            self.successLabel.text = "Sorry!!... User did not authenticate successfully"
-                            print("\n\n\nSorry!!... User did not authenticate successfully\n\n\n")
-                        }
-                    }
-                }
-            } else {
-//                successLabel.text = "Sorry!!.. Could not evaluate policy."
-                print("\n\n\nSorry!!.. Could not evaluate policy.\n\n\n")
-            }
-        } else {
-//            successLabel.text = "Ooops!!.. This feature is not supported."
-            print("\n\n\nOoops!!.. This feature is not supported.\n\n\n")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        touchMe.currentVC = self
+        assignbackground()
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "joel-filipe-Mbf3xFiC1Zo-unsplash"))
+        switch touchMe.biometricType() {
+        case .faceID:
+            touchIDButton.setImage(UIImage(named: "icons8-face-id-100"),  for: .normal)
+        default:
+            touchIDButton.setImage(UIImage(named: "icons8-touch-id-100"),  for: .normal)
         }
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        let touchBool = touchMe.canEvaluatePolicy()
+//        if touchBool {
+//            touchAction()
+//        }
+//    }
+
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        
+//        let storyboard = UIStoryboard(name: "LigandsListStoryboard", bundle: nil)
+//        let newController = storyboard.instantiateViewController(withIdentifier: "ligandsListID") as? LigandsListViewController
+//        if let controller = newController {
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+    }
+    
+    
+    func assignbackground(){
+        let background = UIImage(named: "joel-filipe-Mbf3xFiC1Zo-unsplash")
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = background
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
     }
 }
 

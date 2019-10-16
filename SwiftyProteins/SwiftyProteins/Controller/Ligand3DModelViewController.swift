@@ -8,6 +8,7 @@
 
 import UIKit
 import SceneKit
+import NotificationCenter
 
 struct AtomDescription {
     var number: Int = 0
@@ -31,6 +32,7 @@ class Ligand3DModelViewController: UIViewController {
     var currentAngle: Float = 0.0
     var ifPresent = false
     var currentTapped = ""
+    var elementsInfo = [ElementModel.Element]()
     
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var panGesture: UIPanGestureRecognizer!
@@ -45,8 +47,6 @@ class Ligand3DModelViewController: UIViewController {
     @IBOutlet weak var elementName: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     
-    var elementsInfo = [ElementModel.Element]()
-    
     @IBAction func moreButtonTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "ElementDescription", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "elementID") as? ElementDescriptionViewController
@@ -56,7 +56,12 @@ class Ligand3DModelViewController: UIViewController {
                 controller.element = newElement
                 self.navigationController?.pushViewController(controller, animated: true)
             } else {
-                //show alert something wrong
+                let alertView = UIAlertController(title: "Error",
+                                                  message: "Something going wrong! Try later",
+                                                  preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK!", style: .cancel)
+                alertView.addAction(okAction)
+                self.present(alertView, animated: true)
             }
         }  
     }
@@ -75,13 +80,12 @@ class Ligand3DModelViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIApplication.userDidTakeScreenshotNotification, object: nil)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        NotificationCenter.default.addObserver(self, selector: #selector(shareButtonTapped), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
-//    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         tapGesture.delegate = self
         pinchGesture.delegate = self
@@ -95,6 +99,10 @@ class Ligand3DModelViewController: UIViewController {
         setCamera()
         build3DModel()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(shareButtonTapped(_:)))
+    }
+    
+    @objc func appMovedToBackground() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func getElementsInfo() {
@@ -213,7 +221,6 @@ class Ligand3DModelViewController: UIViewController {
                 nameLabel.textColor = .black
                 pdbxTypeLabel.textColor = .black
                 atomNodes.append(newNode)
-                //remove from array and add new
             }
             for connection in connectionNodes {
                 connection.removeFromParentNode()
@@ -274,7 +281,6 @@ class Ligand3DModelViewController: UIViewController {
             pdbxTypeLabel.textColor = .white
         }
     }
-    
     
     func showAtomDescription(tappedNode: SCNNode) {
         if tappedNode.name != nil {

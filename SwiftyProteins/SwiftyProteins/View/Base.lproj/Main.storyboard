@@ -18,8 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9M-EP-YZi">
+                                <rect key="frame" x="132" y="388" width="151" height="187"/>
+                                <color key="backgroundColor" red="0.69778797334097531" green="0.97499057383222665" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" image="icons8-touch-id-100"/>
+                                <connections>
+                                    <action selector="toichIDAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z2X-Rk-GR2"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgR-lg-rSr">
-                                <rect key="frame" x="170" y="624" width="74" height="218"/>
+                                <rect key="frame" x="170" y="681" width="74" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Sign in">
                                     <color key="titleColor" red="1" green="0.91940931579999996" blue="0.17201754429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -28,28 +36,22 @@
                                     <action selector="signInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Oc-2C-OAb"/>
                                 </connections>
                             </button>
-                            <label userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LoginViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNN-hG-ZKi">
-                                <rect key="frame" x="10" y="388" width="394" height="36"/>
-                                <color key="backgroundColor" red="0.60805231550000005" green="0.52351803389999996" blue="1" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="0.93559537060177977" green="1" blue="0.09676164006804755" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="highlightedColor" red="1" green="0.91940931579999996" blue="0.17201754429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <size key="shadowOffset" width="3" height="4"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.60805231550000005" green="0.52351803389999996" blue="1" alpha="0.642578125" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jgR-lg-rSr" firstAttribute="top" secondItem="cNN-hG-ZKi" secondAttribute="bottom" constant="200" id="1XL-Hr-f7E"/>
-                            <constraint firstItem="cNN-hG-ZKi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="8t7-Uf-h1Y"/>
-                            <constraint firstItem="cNN-hG-ZKi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="300" id="HvO-BL-d2I"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jgR-lg-rSr" secondAttribute="bottom" constant="20" id="MpQ-2M-Czd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c9M-EP-YZi" secondAttribute="trailing" constant="131" id="3Dh-Op-LHd"/>
+                            <constraint firstItem="jgR-lg-rSr" firstAttribute="top" secondItem="c9M-EP-YZi" secondAttribute="bottom" constant="106" id="AL0-Ym-P8k"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jgR-lg-rSr" secondAttribute="bottom" constant="139" id="MpQ-2M-Czd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jgR-lg-rSr" secondAttribute="trailing" constant="170" id="Uzv-dI-S5p"/>
                             <constraint firstItem="jgR-lg-rSr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="170" id="byU-1W-Dyk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cNN-hG-ZKi" secondAttribute="trailing" constant="10" id="xIg-Eb-6eV"/>
+                            <constraint firstItem="c9M-EP-YZi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="300" id="gdn-az-Lnm"/>
+                            <constraint firstItem="c9M-EP-YZi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="132" id="owQ-31-hZA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="pXZ-Gs-ork"/>
+                    <connections>
+                        <outlet property="touchIDButton" destination="c9M-EP-YZi" id="NpP-ue-Z75"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,4 +76,7 @@
             <point key="canvasLocation" x="193" y="44"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-touch-id-100" width="50" height="50"/>
+    </resources>
 </document>
