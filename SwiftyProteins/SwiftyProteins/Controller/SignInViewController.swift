@@ -17,7 +17,6 @@ class SignInViewController: UIViewController {
     
     @IBAction func toichIDAction(_ sender: UIButton) {
         touchAction()
-
     }
     
     @IBOutlet weak var simpleSignInButton: UIButton!
@@ -88,14 +87,8 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func signInButtonTapped(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "LigandsListStoryboard", bundle: nil)
-        let newController = storyboard.instantiateViewController(withIdentifier: "ligandsListID") as? LigandsListViewController
-        if let controller = newController {
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+        goToLigands()
     }
-    
 }
 
 

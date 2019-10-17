@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sign In View Controller-->
+        <!--Authorization-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="SwiftyProteins" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pXZ-Gs-ork"/>
+                    <navigationItem key="navigationItem" title="Authorization" id="pXZ-Gs-ork"/>
                     <connections>
                         <outlet property="simpleSignInButton" destination="jgR-lg-rSr" id="G6i-Sg-dmB"/>
                         <outlet property="touchIDButton" destination="c9M-EP-YZi" id="NpP-ue-Z75"/>

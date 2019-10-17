@@ -15,9 +15,7 @@ class LigandsListViewController: UITableViewController {
     
     var proteinsList: [String] = []
     var filteredProteins: [String] = []
-    
     var activityIndicator = UIActivityIndicatorView()
-    
     let loadMessage = "Please check wi-fi connection or correct section!"
     
     override func viewDidLoad() {
@@ -31,7 +29,6 @@ class LigandsListViewController: UITableViewController {
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
-        
         if let sourceFile = Bundle.main.path(forResource: "ligands", ofType: "txt") {
             if let data = try? String(contentsOfFile: sourceFile, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) {
                 proteinsList = data.components(separatedBy: "\n")
@@ -44,20 +41,9 @@ class LigandsListViewController: UITableViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    
     func goAlertProcessing() {
         let alert = UIAlertController(title: "Error loading ligands", message: loadMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            switch action.style{
-            case .default:
-                print("default")
-            case .cancel:
-                print("cancel")
-            case .destructive:
-                print("destructive")
-            @unknown default:
-                fatalError()
-            }}))
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -116,8 +102,7 @@ extension LigandsListViewController {
         activityIndicator.backgroundColor = UIColor.clear
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int
-    {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -127,9 +112,7 @@ extension LigandsListViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-        
         cell.textLabel?.text = filteredProteins[indexPath.row]
-        
         return cell
     }
 }

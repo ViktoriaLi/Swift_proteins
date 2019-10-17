@@ -130,9 +130,9 @@ class Ligand3DModelViewController: UIViewController {
         if let ligandName = nameLabel.text {
             firstActivityItem += " and name \(ligandName)"
         }
-        let secondActivityItem : URL = URL(string: "http://www.rcsb.org/ligand/001/\(ligandCode)")!
+        let secondActivityItem : URL = URL(string: "http://www.rcsb.org/ligand/\(ligandCode)")!
         let activityViewController = UIActivityViewController(activityItems: [firstActivityItem, secondActivityItem, img!], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
+        activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact, .markupAsPDF, .assignToContact]
         activityViewController.popoverPresentationController?.sourceView = self.view
         DispatchQueue.main.async {
             self.present(activityViewController, animated: true, completion: nil)
@@ -291,7 +291,7 @@ class Ligand3DModelViewController: UIViewController {
             currentTapped = tappedNode.name!
         }
         let text = SCNText(string: tappedNode.name, extrusionDepth: 0)
-        let font = UIFont(name: "Futura", size: 0.5)
+        let font = UIFont(name: "Copperplate-Bold", size: 0.5)
         text.font = font
         text.flatness = 0.005
         text.alignmentMode = CATextLayerAlignmentMode.natural.rawValue
@@ -373,9 +373,6 @@ class Ligand3DModelViewController: UIViewController {
                     }
                 }
             }
-            
-            print("atomInfos1")
-            print(atomInfos)
                 
             for i in 0..<atomInfos.count {
                 for connection in atomInfos[i].connections {
