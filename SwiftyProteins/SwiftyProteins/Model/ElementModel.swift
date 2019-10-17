@@ -40,10 +40,6 @@ struct ElementModel: Decodable {
             case summary = "summary"
             case symbol = "symbol"
         }
-//        required init(from decoder: Decoder) throws {
-//            let values = try decoder.container(keyedBy: CodingKeys.self)
-//            self.name = (try? values.decode(String.self, forKey: .name))
-//        }
     }
     
     

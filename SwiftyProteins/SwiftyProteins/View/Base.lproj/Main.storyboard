@@ -18,15 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adrien-converse-kCrrUx7US04-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="3RQ-Wi-dSD">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9M-EP-YZi">
-                                <rect key="frame" x="132" y="388" width="151" height="187"/>
-                                <color key="backgroundColor" red="0.69778797334097531" green="0.97499057383222665" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" image="icons8-touch-id-100"/>
+                                <rect key="frame" x="137" y="378" width="140" height="140"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Ze8-cQ-sC9"/>
+                                    <constraint firstAttribute="height" constant="140" id="dAA-Jr-0yN"/>
+                                </constraints>
                                 <connections>
                                     <action selector="toichIDAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z2X-Rk-GR2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgR-lg-rSr">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgR-lg-rSr">
                                 <rect key="frame" x="170" y="681" width="74" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Sign in">
@@ -38,18 +44,21 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="c9M-EP-YZi" secondAttribute="trailing" constant="131" id="3Dh-Op-LHd"/>
-                            <constraint firstItem="jgR-lg-rSr" firstAttribute="top" secondItem="c9M-EP-YZi" secondAttribute="bottom" constant="106" id="AL0-Ym-P8k"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3RQ-Wi-dSD" secondAttribute="bottom" id="2OQ-5Y-C2t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jgR-lg-rSr" secondAttribute="bottom" constant="139" id="MpQ-2M-Czd"/>
+                            <constraint firstItem="3RQ-Wi-dSD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TDZ-yv-LuG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jgR-lg-rSr" secondAttribute="trailing" constant="170" id="Uzv-dI-S5p"/>
+                            <constraint firstItem="3RQ-Wi-dSD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bLh-df-1sJ"/>
                             <constraint firstItem="jgR-lg-rSr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="170" id="byU-1W-Dyk"/>
-                            <constraint firstItem="c9M-EP-YZi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="300" id="gdn-az-Lnm"/>
-                            <constraint firstItem="c9M-EP-YZi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="132" id="owQ-31-hZA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3RQ-Wi-dSD" secondAttribute="trailing" id="dbo-uJ-8t1"/>
+                            <constraint firstItem="c9M-EP-YZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e8N-yp-uXX"/>
+                            <constraint firstItem="c9M-EP-YZi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vsH-4i-37Y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="pXZ-Gs-ork"/>
                     <connections>
+                        <outlet property="simpleSignInButton" destination="jgR-lg-rSr" id="G6i-Sg-dmB"/>
                         <outlet property="touchIDButton" destination="c9M-EP-YZi" id="NpP-ue-Z75"/>
                     </connections>
                 </viewController>
@@ -77,6 +86,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-touch-id-100" width="50" height="50"/>
+        <image name="adrien-converse-kCrrUx7US04-unsplash" width="2016" height="1512"/>
     </resources>
 </document>

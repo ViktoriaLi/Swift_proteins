@@ -126,18 +126,22 @@ class Ligand3DModelViewController: UIViewController {
         self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let activityViewController = UIActivityViewController(activityItems: [img!], applicationActivities: nil)
+        var firstActivityItem = "This is a 3D model of ligand with code \(ligandCode)"
+        if let ligandName = nameLabel.text {
+            firstActivityItem += " and name \(ligandName)"
+        }
+        let secondActivityItem : URL = URL(string: "http://www.rcsb.org/ligand/001/\(ligandCode)")!
+        let activityViewController = UIActivityViewController(activityItems: [firstActivityItem, secondActivityItem, img!], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [.addToReadingList, .airDrop, .copyToPasteboard, .mail, .assignToContact]
         activityViewController.popoverPresentationController?.sourceView = self.view
         DispatchQueue.main.async {
             self.present(activityViewController, animated: true, completion: nil)
-            self.present(activityViewController, animated: true, completion: nil)
         }
         activityViewController.completionWithItemsHandler = { activity, completed, items, error in
-            if completed {
+            if completed == true, error == nil {
                 self.showAlertController("Your photo was uploaded successfully.")
             }
-            else if error != nil{
+            else if error != nil || completed == false{
                 self.showAlertController("Some error occurred. Please try again.")
             }
         }
@@ -515,10 +519,6 @@ extension Ligand3DModelViewController: UIGestureRecognizerDelegate {
             }
         }
     }
-}
-
-enum Elements {
-    
 }
 
 extension UIColor {

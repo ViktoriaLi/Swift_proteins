@@ -81,9 +81,9 @@
 				C11B3E1823337FB3004D918B /* Model */,
 				C11B3E1923337FBB004D918B /* View */,
 				C11B3E1A23337FC0004D918B /* Controller */,
+				5C9DA42F235737210054FCF9 /* TouchIDAuthentication.swift */,
 				C11B3E0623337BB3004D918B /* AppDelegate.swift */,
 				C11B3E0D23337BBE004D918B /* Assets.xcassets */,
-				5C9DA42F235737210054FCF9 /* TouchIDAuthentication.swift */,
 				C11B3E0F23337BBE004D918B /* LaunchScreen.storyboard */,
 				C11B3E1223337BBE004D918B /* Info.plist */,
 			);
@@ -353,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4FJNVARW84;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -371,6 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4FJNVARW84;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

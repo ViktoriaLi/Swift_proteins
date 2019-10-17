@@ -9,11 +9,7 @@
 import UIKit
 import LocalAuthentication
 
-protocol SuccessAuth {
-    func goToLigands()
-}
-
-class SignInViewController: UIViewController, SuccessAuth {
+class SignInViewController: UIViewController {
 
     let touchMe = BiometricIDAuth()
     
@@ -21,26 +17,46 @@ class SignInViewController: UIViewController, SuccessAuth {
     
     @IBAction func toichIDAction(_ sender: UIButton) {
         touchAction()
+
     }
     
+    @IBOutlet weak var simpleSignInButton: UIButton!
+    
     func touchAction() {
-        touchMe.authenticateUser() { [weak self] message in
-            if message != nil {
-                let alertView = UIAlertController(title: "Go to Sign in",
+        touchMe.authenticateUser() { [weak self] message, ifCancel in
+            if let message = message, ifCancel == false {
+                let alertView = UIAlertController(title: "Error",
                                                   message: message,
                                                   preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Darn!", style: .default)
                 alertView.addAction(okAction)
-                self?.present(alertView, animated: true)
-                
-            } else {
-                /*let alertView = UIAlertController(title: "You can try this optionon real device",
-                                                  message: message,
-                                                  preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Darn!", style: .default)
-                alertView.addAction(okAction)
-                self?.present(alertView, animated: true)*/
+                self?.present(alertView, animated: true, completion: {
+                    switch UIDevice.current.orientation {
+                    case .landscapeRight:
+                        alertView.view.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+                    case .landscapeLeft:
+                        alertView.view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+                    default:
+                        alertView.view.transform = CGAffineTransform.identity
+                    }
+                })
+            }
+            else if ifCancel == true {
+                self?.touchMe.context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "You need authorization") { success, error in
+                    DispatchQueue.main.async {
+                        if success {
+                            self?.goToLigands()
+                            print("FIRST goToLigands")
+                            
+                        } else {
+                            print("touchMe false")
+                        }
+                    }
+                }
+            }
+            else {
                 self?.goToLigands()
+                print("SECOND goToLigands")
             }
         }
     }
@@ -55,47 +71,31 @@ class SignInViewController: UIViewController, SuccessAuth {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        touchMe.currentVC = self
-        assignbackground()
-//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "joel-filipe-Mbf3xFiC1Zo-unsplash"))
+        touchIDButton.layer.cornerRadius = touchIDButton.frame.height / 2
         switch touchMe.biometricType() {
         case .faceID:
-            touchIDButton.setImage(UIImage(named: "icons8-face-id-100"),  for: .normal)
+            touchIDButton.setImage(UIImage(named: "icons8-face-id-101"),  for: .normal)
+            simpleSignInButton.isHidden = true
+            touchIDButton.isHidden = false
+        case .touchID:
+            touchIDButton.setImage(UIImage(named: "icons8-touch-id-144"),  for: .normal)
+            simpleSignInButton.isHidden = true
+            touchIDButton.isHidden = false
         default:
-            touchIDButton.setImage(UIImage(named: "icons8-touch-id-100"),  for: .normal)
+            simpleSignInButton.isHidden = false
+            touchIDButton.isHidden = true
         }
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        let touchBool = touchMe.canEvaluatePolicy()
-//        if touchBool {
-//            touchAction()
-//        }
-//    }
 
     @IBAction func signInButtonTapped(_ sender: UIButton) {
         
-//        let storyboard = UIStoryboard(name: "LigandsListStoryboard", bundle: nil)
-//        let newController = storyboard.instantiateViewController(withIdentifier: "ligandsListID") as? LigandsListViewController
-//        if let controller = newController {
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
+        let storyboard = UIStoryboard(name: "LigandsListStoryboard", bundle: nil)
+        let newController = storyboard.instantiateViewController(withIdentifier: "ligandsListID") as? LigandsListViewController
+        if let controller = newController {
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
-    
-    func assignbackground(){
-        let background = UIImage(named: "joel-filipe-Mbf3xFiC1Zo-unsplash")
-        
-        var imageView : UIImageView!
-        imageView = UIImageView(frame: view.bounds)
-        imageView.contentMode =  UIView.ContentMode.scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = background
-        imageView.center = view.center
-        view.addSubview(imageView)
-        self.view.sendSubviewToBack(imageView)
-    }
 }
 
 

@@ -18,14 +18,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jeremy-thomas-rMmibFe4czY-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="9Mu-Id-wyH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alexander-andrews-fsH1KjbdjE8-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="9Mu-Id-wyH">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swifty Proteins" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCT-1x-xY5">
+                                <rect key="frame" x="99" y="769" width="216.5" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
+                            <constraint firstItem="ZCT-1x-xY5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="03x-Ka-PGs"/>
                             <constraint firstItem="9Mu-Id-wyH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7kI-Fv-hc1"/>
+                            <constraint firstItem="9Mu-Id-wyH" firstAttribute="bottom" secondItem="ZCT-1x-xY5" secondAttribute="bottom" constant="52" id="Qe9-s4-Umq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Mu-Id-wyH" secondAttribute="trailing" id="cKm-j2-wnW"/>
                             <constraint firstItem="9Mu-Id-wyH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fV4-pV-kpD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Mu-Id-wyH" secondAttribute="bottom" id="tQs-9i-nER"/>
@@ -35,10 +43,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="jeremy-thomas-rMmibFe4czY-unsplash" width="1728" height="2592"/>
+        <image name="alexander-andrews-fsH1KjbdjE8-unsplash" width="2020.5" height="3162"/>
     </resources>
 </document>

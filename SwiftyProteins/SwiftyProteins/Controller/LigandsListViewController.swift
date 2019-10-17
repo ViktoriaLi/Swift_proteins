@@ -94,7 +94,6 @@ extension LigandsListViewController {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.activityIndicator.stopAnimating()
                         self.activityIndicator.hidesWhenStopped = true
-                        //completionHandler(pdbfile)
                     }
                 }
                 else {

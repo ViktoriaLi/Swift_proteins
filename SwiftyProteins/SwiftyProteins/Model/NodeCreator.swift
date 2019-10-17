@@ -31,7 +31,6 @@ class NodeCreator {
     
     class func makeAtomOriginal(from old: SCNNode) -> SCNNode {
         let node = SCNNode()
-        //node.geometry = SCNCone(topRadius: 0.2, bottomRadius: 0.3, height: 1)
         node.geometry = SCNBox(width: 0.6, height: 0.6, length: 0.6, chamferRadius: 0.1)
         node.position = SCNVector3(old.position.x, old.position.y, old.position.z)
         node.geometry?.firstMaterial?.diffuse.contents = cpkColor(atomType: Substring(old.name!)).inverse()
